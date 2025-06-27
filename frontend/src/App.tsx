@@ -48,10 +48,24 @@ function App() {
         setShowForm(false);
         loadCandidatos(); // Recargar la lista
       } else {
-        toast.error(response.message || 'Error al crear candidato');
+        // Mostrar errores específicos por campo si están disponibles
+        if (response.fieldErrors) {
+          Object.entries(response.fieldErrors).forEach(([field, error]) => {
+            toast.error(`${field}: ${error}`);
+          });
+        } else {
+          toast.error(response.message || 'Error al crear candidato');
+        }
       }
     } catch (error: any) {
-      toast.error(error.message || 'Error al crear candidato');
+      // Manejar errores con fieldErrors
+      if (error.fieldErrors) {
+        Object.entries(error.fieldErrors).forEach(([field, errorMsg]) => {
+          toast.error(`${field}: ${errorMsg}`);
+        });
+      } else {
+        toast.error(error.message || 'Error al crear candidato');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -72,10 +86,24 @@ function App() {
         setEditingCandidato(null);
         loadCandidatos(); // Recargar la lista
       } else {
-        toast.error(response.message || 'Error al actualizar candidato');
+        // Mostrar errores específicos por campo si están disponibles
+        if (response.fieldErrors) {
+          Object.entries(response.fieldErrors).forEach(([field, error]) => {
+            toast.error(`${field}: ${error}`);
+          });
+        } else {
+          toast.error(response.message || 'Error al actualizar candidato');
+        }
       }
     } catch (error: any) {
-      toast.error(error.message || 'Error al actualizar candidato');
+      // Manejar errores con fieldErrors
+      if (error.fieldErrors) {
+        Object.entries(error.fieldErrors).forEach(([field, errorMsg]) => {
+          toast.error(`${field}: ${errorMsg}`);
+        });
+      } else {
+        toast.error(error.message || 'Error al actualizar candidato');
+      }
     } finally {
       setIsSubmitting(false);
     }

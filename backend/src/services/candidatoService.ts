@@ -29,10 +29,19 @@ export class CandidatoService {
           errors: validation.error.details,
           email: candidatoData.email 
         });
+        
+        // Crear un objeto con errores específicos por campo
+        const fieldErrors: { [key: string]: string } = {};
+        validation.error.details.forEach(detail => {
+          const field = detail.path[0] as string;
+          fieldErrors[field] = detail.message;
+        });
+        
         return {
           success: false,
           message: 'Datos de entrada inválidos',
-          error: validation.error.details.map(detail => detail.message).join(', ')
+          error: 'Validación fallida',
+          fieldErrors: fieldErrors
         };
       }
 
@@ -140,10 +149,19 @@ export class CandidatoService {
           errors: validation.error.details,
           id 
         });
+        
+        // Crear un objeto con errores específicos por campo
+        const fieldErrors: { [key: string]: string } = {};
+        validation.error.details.forEach(detail => {
+          const field = detail.path[0] as string;
+          fieldErrors[field] = detail.message;
+        });
+        
         return {
           success: false,
           message: 'Datos de entrada inválidos',
-          error: validation.error.details.map(detail => detail.message).join(', ')
+          error: 'Validación fallida',
+          fieldErrors: fieldErrors
         };
       }
 
@@ -166,7 +184,8 @@ export class CandidatoService {
           return {
             success: false,
             message: 'Ya existe otro candidato con este email',
-            error: 'Email duplicado'
+            error: 'Email duplicado',
+            fieldErrors: { email: 'Ya existe otro candidato con este email' }
           };
         }
       }

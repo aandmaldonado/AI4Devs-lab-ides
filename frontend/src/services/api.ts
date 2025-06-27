@@ -128,6 +128,15 @@ class ApiService {
     if (error.response) {
       // Error de respuesta del servidor
       const { data, status } = error.response;
+      
+      // Si hay fieldErrors, crear un error personalizado que los preserve
+      if (data?.fieldErrors) {
+        const customError = new Error(data.message || 'Error de validación');
+        (customError as any).fieldErrors = data.fieldErrors;
+        (customError as any).status = status;
+        return customError;
+      }
+      
       const message = data?.message || `Error ${status}: ${data?.error || 'Error desconocido'}`;
       return new Error(message);
     } else if (error.request) {

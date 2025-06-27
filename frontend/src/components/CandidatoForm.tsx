@@ -105,6 +105,7 @@ const CandidatoForm: React.FC<CandidatoFormProps> = ({
             <input
               id="nombre"
               type="text"
+              placeholder="Ej: Juan Carlos"
               {...register('nombre', {
                 required: 'El nombre es obligatorio',
                 maxLength: {
@@ -127,6 +128,7 @@ const CandidatoForm: React.FC<CandidatoFormProps> = ({
             <input
               id="apellido"
               type="text"
+              placeholder="Ej: González López"
               {...register('apellido', {
                 required: 'El apellido es obligatorio',
                 maxLength: {
@@ -151,6 +153,7 @@ const CandidatoForm: React.FC<CandidatoFormProps> = ({
           <input
             id="email"
             type="email"
+            placeholder="Ej: juan.gonzalez@empresa.com"
             {...register('email', {
               required: 'El email es obligatorio',
               pattern: {
@@ -178,6 +181,7 @@ const CandidatoForm: React.FC<CandidatoFormProps> = ({
           <input
             id="telefono"
             type="tel"
+            placeholder="Ej: +34 612 345 678"
             {...register('telefono', {
               maxLength: {
                 value: 20,
@@ -200,6 +204,7 @@ const CandidatoForm: React.FC<CandidatoFormProps> = ({
           <input
             id="direccion"
             type="text"
+            placeholder="Ej: Calle Mayor 123, Madrid, España"
             {...register('direccion', {
               maxLength: {
                 value: 200,
@@ -219,18 +224,18 @@ const CandidatoForm: React.FC<CandidatoFormProps> = ({
           <label htmlFor="educacion" className="form-label">
             Educación
           </label>
-          <textarea
+          <input
             id="educacion"
+            type="text"
+            placeholder="Ej: Ingeniería Informática - Universidad Politécnica de Madrid (2018)"
             {...register('educacion', {
               maxLength: {
                 value: 200,
                 message: 'La educación no puede exceder 200 caracteres'
               }
             })}
-            className={`input-field resize-none ${errors.educacion ? 'border-error-300' : ''}`}
-            rows={3}
+            className={`input-field ${errors.educacion ? 'border-error-300' : ''}`}
             maxLength={200}
-            placeholder="Ej: Ingeniería Informática - Universidad Politécnica de Madrid (2018)"
           />
           {errors.educacion && (
             <p className="form-error">{errors.educacion.message}</p>
@@ -240,20 +245,19 @@ const CandidatoForm: React.FC<CandidatoFormProps> = ({
         {/* Experiencia */}
         <div>
           <label htmlFor="experiencia" className="form-label">
-            Experiencia Laboral
+            Experiencia
           </label>
           <textarea
             id="experiencia"
+            placeholder="Ej: Desarrollador Full Stack en TechCorp (2019-2023), Especializado en React y Node.js"
             {...register('experiencia', {
               maxLength: {
                 value: 500,
                 message: 'La experiencia no puede exceder 500 caracteres'
               }
             })}
-            className={`input-field resize-none ${errors.experiencia ? 'border-error-300' : ''}`}
-            rows={4}
+            className={`input-field min-h-[100px] resize-vertical ${errors.experiencia ? 'border-error-300' : ''}`}
             maxLength={500}
-            placeholder="Ej: Desarrolladora Full Stack en TechCorp (2019-2023), Especializada en React y Node.js"
           />
           {errors.experiencia && (
             <p className="form-error">{errors.experiencia.message}</p>

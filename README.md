@@ -1,245 +1,160 @@
-# LTI - Sistema de Seguimiento de Talento (ATS)
+# Sistema ATS (Applicant Tracking System)
 
-Este proyecto es una aplicación full-stack con un frontend en React y un backend en Express usando Prisma como ORM. El frontend se inicia con Create React App y el backend está escrito en TypeScript.
+Sistema completo de gestión de candidatos con React frontend y Express backend, usando Prisma ORM y PostgreSQL.
 
-## 🚀 Inicio Rápido
+## 🚀 Características
+
+- **Frontend**: React con TypeScript, Tailwind CSS, y validación en tiempo real
+- **Backend**: Express.js con TypeScript, Prisma ORM, y validaciones robustas
+- **Base de Datos**: PostgreSQL con migraciones automáticas
+- **Validación**: Errores específicos por campo con feedback detallado al usuario
+- **Testing**: Tests unitarios y de integración completos
+- **Seguridad**: Middleware de seguridad y validación de entrada
+- **Logging**: Sistema de logs estructurado
+
+## 📋 Estado del Proyecto
+
+✅ **Completado**:
+- Backend con validaciones detalladas y manejo de errores específicos por campo
+- Frontend con interfaz moderna y manejo robusto de errores
+- Sistema de testing completo (backend: 3 tests, frontend: 12 tests)
+- Base de datos con migraciones y seeding
+- Documentación completa
+
+## 🛠️ Instalación
 
 ### Prerrequisitos
-- Node.js (v16 o superior)
+- Node.js v20.x o superior
 - Docker y Docker Compose
 - npm o yarn
 
-### 1. Configurar la Base de Datos
+### Configuración
+
+1. **Clonar el repositorio**
 ```bash
-# Iniciar PostgreSQL con Docker
+git clone <repository-url>
+cd AI4Devs-lab-ides
+```
+
+2. **Configurar base de datos**
+```bash
 docker-compose up -d
 ```
 
-### 2. Instalar Dependencias
+3. **Configurar backend**
 ```bash
-# Instalar todas las dependencias (backend y frontend)
-npm run install:all
-
-# O instalar por separado:
-npm run install:backend
-npm run install:frontend
+cd backend
+npm install
+npx prisma migrate dev
+npm run seed
 ```
 
-### 3. Configurar la Base de Datos
+4. **Configurar frontend**
 ```bash
-# Configurar Prisma y ejecutar migraciones
-npm run db:setup
-
-# O ejecutar paso a paso:
-npm run prisma:generate
-npm run prisma:migrate
-npm run prisma:seed
+cd frontend
+npm install
 ```
 
-### 4. Iniciar la Aplicación
-```bash
-# Terminal 1: Iniciar backend
-npm run dev:backend
+## 🚀 Ejecución
 
-# Terminal 2: Iniciar frontend
-npm run dev:frontend
+### Desarrollo
+
+**Backend:**
+```bash
+cd backend
+npm run dev
+```
+Servidor disponible en: http://localhost:3010
+
+**Frontend:**
+```bash
+cd frontend
+npm start
+```
+Aplicación disponible en: http://localhost:3000
+
+### Testing
+
+**Backend:**
+```bash
+cd backend
+npm test
+```
+
+**Frontend:**
+```bash
+cd frontend
+npm test
 ```
 
 ## 📁 Estructura del Proyecto
 
 ```
 AI4Devs-lab-ides/
-├── backend/                 # Servidor Express + TypeScript
+├── backend/                 # Servidor Express
 │   ├── src/
-│   │   ├── config/         # Configuración (DB, Logger)
-│   │   ├── controllers/    # Controladores HTTP
-│   │   ├── services/       # Lógica de negocio
-│   │   ├── repositories/   # Acceso a datos
-│   │   ├── validators/     # Validaciones
-│   │   ├── types/          # Interfaces TypeScript
-│   │   ├── middleware/     # Middleware de seguridad
-│   │   ├── routes/         # Rutas RESTful
-│   │   └── scripts/        # Scripts de seed
-│   ├── prisma/             # Esquema de base de datos
-│   └── package.json
-├── frontend/               # Aplicación React + TypeScript
+│   │   ├── controllers/     # Controladores de la API
+│   │   ├── services/        # Lógica de negocio
+│   │   ├── repositories/    # Acceso a datos
+│   │   ├── middleware/      # Middleware personalizado
+│   │   ├── routes/          # Rutas de la API
+│   │   ├── validators/      # Validaciones de entrada
+│   │   └── types/           # Tipos TypeScript
+│   └── prisma/              # Esquema y migraciones de BD
+├── frontend/                # Aplicación React
 │   ├── src/
-│   │   ├── components/     # Componentes React
-│   │   ├── services/       # Servicios de API
-│   │   └── types/          # Interfaces TypeScript
-│   └── package.json
-├── docs/                   # Documentación
-├── docker-compose.yml      # Configuración de Docker
-└── package.json           # Scripts del proyecto raíz
+│   │   ├── components/      # Componentes React
+│   │   ├── services/        # Servicios de API
+│   │   ├── types/           # Tipos TypeScript
+│   │   └── tests/           # Tests del frontend
+└── docs/                    # Documentación
 ```
 
-## 🔧 Comandos Disponibles
+## 🔧 API Endpoints
 
-### Desde el directorio raíz:
-```bash
-# Instalación
-npm run install:all         # Instalar backend y frontend
-npm run install:backend     # Solo backend
-npm run install:frontend    # Solo frontend
-
-# Base de datos
-npm run db:setup           # Configurar DB completa
-npm run prisma:generate    # Generar cliente Prisma
-npm run prisma:migrate     # Ejecutar migraciones
-npm run prisma:seed        # Poblar con datos dummy
-
-# Desarrollo
-npm run dev:backend        # Servidor backend (puerto 3010)
-npm run dev:frontend       # Servidor frontend (puerto 3000)
-
-# Build
-npm run build:backend      # Compilar backend
-npm run build:frontend     # Compilar frontend
-
-# Tests
-npm run test:backend       # Tests del backend
-npm run test:frontend      # Tests del frontend
-```
-
-### Desde el directorio backend:
-```bash
-cd backend
-npm install
-npm run prisma:generate
-npm run prisma:migrate
-npm run prisma:seed
-npm run dev
-```
-
-### Desde el directorio frontend:
-```bash
-cd frontend
-npm install
-npm start
-```
-
-## 🌐 Endpoints de la API
-
-- `GET /` - Información del servidor
-- `GET /health` - Health check
-- `GET /api/candidatos` - Listar candidatos
-- `POST /api/candidatos` - Crear candidato
-- `GET /api/candidatos/:id` - Obtener candidato
+### Candidatos
+- `GET /api/candidatos` - Listar candidatos con filtros
+- `GET /api/candidatos/:id` - Obtener candidato por ID
+- `POST /api/candidatos` - Crear nuevo candidato
 - `PUT /api/candidatos/:id` - Actualizar candidato
 - `DELETE /api/candidatos/:id` - Eliminar candidato
 
-## 🗄️ Base de Datos
-
-### Configuración PostgreSQL
-- **Host:** localhost
-- **Puerto:** 5432
-- **Usuario:** LTIdbUser
-- **Contraseña:** D1ymf8wyQEGthFR1E9xhCq
-- **Base de datos:** LTIdb
-
-### Modelo de Datos
-```prisma
-model Candidato {
-  id           Int      @id @default(autoincrement())
-  nombre       String   @db.VarChar(100)
-  apellido     String   @db.VarChar(100)
-  email        String   @unique @db.VarChar(150)
-  telefono     String?  @db.VarChar(20)
-  direccion    String?  @db.VarChar(200)
-  educacion    String?  @db.VarChar(200)
-  experiencia  String?  @db.VarChar(500)
-  cvUrl        String?  @db.VarChar(300)
-  creadoEn     DateTime @default(now())
-}
-```
-
-## 🔒 Características de Seguridad
-
-- **Rate Limiting:** 100 requests/minuto por IP
-- **Headers de Seguridad:** Helmet.js
-- **CORS:** Configurado para frontend
-- **Validación:** Joi para validación de datos
-- **Logging:** Winston para logging estructurado
-- **Sanitización:** Prevención de XSS e inyección SQL
-
-## 🎨 Frontend
-
-- **Framework:** React 18 + TypeScript
-- **Styling:** Tailwind CSS
-- **Formularios:** React Hook Form
-- **Notificaciones:** React Toastify
-- **HTTP Client:** Axios
-- **Diseño:** Responsivo y accesible
+### Validación
+El sistema incluye validación robusta con errores específicos por campo:
+- Validación de formato de email
+- Validación de longitud de campos
+- Validación de campos requeridos
+- Feedback detallado al usuario
 
 ## 🧪 Testing
 
+El proyecto incluye tests completos para validar:
+- Funcionalidad de la API
+- Manejo de errores de validación
+- Componentes del frontend
+- Servicios de API
+
+**Ejecutar todos los tests:**
 ```bash
-# Backend tests
-npm run test:backend
+# Backend
+cd backend && npm test
 
-# Frontend tests
-npm run test:frontend
+# Frontend
+cd frontend && npm test
 ```
 
-- Los tests de backend validan el JSON real devuelto por el endpoint raíz (`/`).
-- Los tests de frontend usan la configuración por defecto de react-scripts para máxima compatibilidad.
-- Se recomienda usar mocks para dependencias externas (axios, react-toastify) en los tests de React.
-- Si se requiere soporte avanzado para ESModules, considerar migrar a Vite + Vitest o Next.js.
+## 📝 Historial de Desarrollo
 
-## 🚨 Solución de Problemas
+### Última Actualización (27 Junio 2025)
+- **Bug Fix**: Resuelto problema de validación donde se mostraban errores genéricos en lugar de errores específicos por campo
+- **Mejoras**: 
+  - Backend mejorado para devolver errores detallados por campo
+  - Frontend actualizado para mostrar errores específicos via toast notifications
+  - Tests agregados para validar el manejo de errores con `fieldErrors`
+- **Resultado**: Mejor experiencia de usuario con feedback específico de validación
 
-### Error: "Could not read package.json"
-**Problema:** Ejecutar comandos de Prisma desde el directorio raíz.
-**Solución:** Usar los scripts del package.json raíz o navegar al directorio backend.
-
-### Error: "Debug Failure. False expression: Non-string value passed to ts.resolveTypeReferenceDirective"
-**Problema:** Conflicto de versiones entre TypeScript y ts-node al ejecutar `npm run prisma:seed`.
-**Solución:** 
-```bash
-# Actualizar versiones en backend/package.json
-npm install typescript@^5.3.3 ts-node@^10.9.2 ts-node-dev@^2.0.0
-# Reinstalar dependencias
-npm install
-```
-
-### Error: "ReferenceError: cors is not defined"
-**Problema:** Falta importación de `cors` en `backend/src/index.ts`.
-**Solución:** 
-```typescript
-// Agregar esta importación en backend/src/index.ts
-import cors from 'cors';
-```
-
-### Error de conexión a la base de datos
-**Problema:** PostgreSQL no está ejecutándose.
-**Solución:** `docker-compose up -d`
-
-### Error de migración
-**Problema:** Esquema de Prisma no sincronizado.
-**Solución:** `npm run prisma:generate && npm run prisma:migrate`
-
-### Error: "TypeError: Cannot read properties of undefined (reading 'html')" en tests de frontend
-**Problema:** Incompatibilidad entre versiones de Jest, jsdom y/o ts-jest, especialmente con Node.js experimental.
-**Solución:**
-- Usar Node.js LTS (v20.x o v18.x) y limpiar/reinstalar dependencias.
-- Eliminar configuraciones personalizadas de Jest y usar la configuración por defecto de react-scripts.
-- Adaptar los tests para usar mocks en dependencias externas (axios, react-toastify).
-- Para tests TypeScript, asegurarse de que los archivos sean módulos (`export {}` al final si es necesario).
-
-## 📚 Documentación Adicional
-
-- [Requerimientos Técnicos](./docs/requerimientos.md)
-- [Historia de Usuario](./docs/hdu.md)
-- [Prompts Iniciales](./prompts-iniciales.md)
-
-## 🤝 Contribución
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+Ver `prompts-iniciales.md` para el historial completo de desarrollo.
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia ISC. Ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para detalles.

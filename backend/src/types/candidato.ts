@@ -46,6 +46,7 @@ export interface ICandidatoResponse {
   message: string;
   data?: ICandidato | ICandidato[];
   error?: string;
+  fieldErrors?: { [key: string]: string };
 }
 
 /**
