@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ICandidato, ICandidatoFilters } from '../types/candidato';
+import { FaEye, FaEdit, FaTrash, FaDownload, FaSort, FaSortUp, FaSortDown } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
 
 /**
  * Props del componente CandidatoList
@@ -7,7 +10,7 @@ import { ICandidato, ICandidatoFilters } from '../types/candidato';
 interface CandidatoListProps {
   candidatos: ICandidato[];
   onEdit: (candidato: ICandidato) => void;
-  onDelete: (id: number) => void;
+  onDelete: (documento: string) => void;
   onRefresh: () => void;
   isLoading?: boolean;
 }
@@ -27,10 +30,14 @@ const CandidatoList: React.FC<CandidatoListProps> = ({
   const [filteredCandidatos, setFilteredCandidatos] = useState<ICandidato[]>(candidatos);
   const [currentPage, setCurrentPage] = useState(1);
   const [candidatosPerPage] = useState(10);
+  const navigate = useNavigate();
+  const [sortField, setSortField] = useState<'documento' | 'nombre' | 'email' | 'telefono' | 'cvNombre' | 'ultimaModificacion'>('ultimaModificacion');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
   // Filtrar candidatos cuando cambie la búsqueda o la lista
   useEffect(() => {
     const filtered = candidatos.filter(candidato =>
+      candidato.documento.toLowerCase().includes(searchTerm.toLowerCase()) ||
       candidato.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
       candidato.apellido.toLowerCase().includes(searchTerm.toLowerCase()) ||
       candidato.email.toLowerCase().includes(searchTerm.toLowerCase())
@@ -39,11 +46,35 @@ const CandidatoList: React.FC<CandidatoListProps> = ({
     setCurrentPage(1); // Resetear a la primera página cuando se filtre
   }, [candidatos, searchTerm]);
 
+  const handleSort = (field: typeof sortField) => {
+    if (sortField === field) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortField(field);
+      setSortOrder('asc');
+    }
+  };
+
+  const sortedCandidatos = [...filteredCandidatos].sort((a, b) => {
+    let aValue: string | number = String(a[sortField] ?? '');
+    let bValue: string | number = String(b[sortField] ?? '');
+    if (sortField === 'ultimaModificacion') {
+      aValue = aValue ? new Date(aValue).getTime() : 0;
+      bValue = bValue ? new Date(bValue).getTime() : 0;
+    } else {
+      aValue = aValue.toString().toLowerCase();
+      bValue = bValue.toString().toLowerCase();
+    }
+    if (aValue < bValue) return sortOrder === 'asc' ? -1 : 1;
+    if (aValue > bValue) return sortOrder === 'asc' ? 1 : -1;
+    return 0;
+  });
+
   // Calcular candidatos para la página actual
   const indexOfLastCandidato = currentPage * candidatosPerPage;
   const indexOfFirstCandidato = indexOfLastCandidato - candidatosPerPage;
-  const currentCandidatos = filteredCandidatos.slice(indexOfFirstCandidato, indexOfLastCandidato);
-  const totalPages = Math.ceil(filteredCandidatos.length / candidatosPerPage);
+  const currentCandidatos = sortedCandidatos.slice(indexOfFirstCandidato, indexOfLastCandidato);
+  const totalPages = Math.ceil(sortedCandidatos.length / candidatosPerPage);
 
   /**
    * Formatea la fecha de creación
@@ -67,6 +98,29 @@ const CandidatoList: React.FC<CandidatoListProps> = ({
     return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
   };
 
+  // Descarga robusta del CV usando POST y blob
+  const handleDownloadCV = async (documento: string, cvNombre: string) => {
+    try {
+      const response = await fetch('/api/candidatos/descargar-cv', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ documento })
+      });
+      if (!response.ok) throw new Error('No se pudo descargar el archivo');
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = cvNombre;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      alert('Error al descargar el CV');
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Header con búsqueda y botón de refresh */}
@@ -79,7 +133,7 @@ const CandidatoList: React.FC<CandidatoListProps> = ({
             <input
               id="search"
               type="text"
-              placeholder="Buscar por nombre, apellido o email..."
+              placeholder="Buscar por documento, nombre o contacto..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="input-field pl-10"
@@ -128,72 +182,72 @@ const CandidatoList: React.FC<CandidatoListProps> = ({
       ) : (
         <div className="overflow-hidden shadow-soft rounded-lg">
           <table className="min-w-full divide-y divide-secondary-200">
-            <thead className="bg-secondary-50">
+            <thead>
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider">
-                  Candidato
+                <th className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider cursor-pointer" onClick={() => handleSort('documento')}>
+                  Número de documento (DNI/Pasaporte)
+                  {sortField === 'documento' ? (sortOrder === 'asc' ? <FaSortUp className="inline ml-1" /> : <FaSortDown className="inline ml-1" />) : <FaSort className="inline ml-1 text-secondary-300" />}
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider cursor-pointer" onClick={() => handleSort('nombre')}>
+                  Nombre
+                  {sortField === 'nombre' ? (sortOrder === 'asc' ? <FaSortUp className="inline ml-1" /> : <FaSortDown className="inline ml-1" />) : <FaSort className="inline ml-1 text-secondary-300" />}
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider cursor-pointer" onClick={() => handleSort('email')}>
                   Contacto
+                  {sortField === 'email' ? (sortOrder === 'asc' ? <FaSortUp className="inline ml-1" /> : <FaSortDown className="inline ml-1" />) : <FaSort className="inline ml-1 text-secondary-300" />}
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider">
-                  Educación
+                <th className="px-6 py-3 text-center text-xs font-medium text-secondary-500 uppercase tracking-wider cursor-pointer" onClick={() => handleSort('cvNombre')}>
+                  CV
+                  {sortField === 'cvNombre' ? (sortOrder === 'asc' ? <FaSortUp className="inline ml-1" /> : <FaSortDown className="inline ml-1" />) : <FaSort className="inline ml-1 text-secondary-300" />}
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider">
-                  Fecha
+                <th className="px-6 py-3 text-center text-xs font-medium text-secondary-500 uppercase tracking-wider cursor-pointer" onClick={() => handleSort('ultimaModificacion')}>
+                  Última modificación
+                  {sortField === 'ultimaModificacion' ? (sortOrder === 'asc' ? <FaSortUp className="inline ml-1" /> : <FaSortDown className="inline ml-1" />) : <FaSort className="inline ml-1 text-secondary-300" />}
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-secondary-500 uppercase tracking-wider">
-                  Acciones
-                </th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-secondary-500 uppercase tracking-wider">Acciones</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-secondary-200">
               {currentCandidatos.map((candidato) => (
-                <tr key={candidato.id} className="hover:bg-secondary-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 h-10 w-10">
-                        <div className="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center">
-                          <span className="text-sm font-medium text-primary-700">
-                            {candidato.nombre.charAt(0)}{candidato.apellido.charAt(0)}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-secondary-900">
-                          {candidato.nombre} {candidato.apellido}
-                        </div>
-                        <div className="text-sm text-secondary-500">
-                          {truncateText(candidato.direccion, 30)}
-                        </div>
-                      </div>
-                    </div>
-                  </td>
+                <tr key={candidato.documento} className="hover:bg-secondary-50">
+                  <td className="px-6 py-4 whitespace-nowrap">{candidato.documento}</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-semibold">{candidato.nombre} {candidato.apellido}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-secondary-900">{candidato.email}</div>
                     <div className="text-sm text-secondary-500">{candidato.telefono || 'N/A'}</div>
                   </td>
-                  <td className="px-6 py-4">
-                    <div className="text-sm text-secondary-900">
-                      {truncateText(candidato.educacion, 40)}
-                    </div>
+                  <td className="px-6 py-4 text-center">
+                    {candidato.cv && candidato.cvNombre ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <FaDownload
+                          className="inline text-primary-600 hover:text-primary-800 cursor-pointer"
+                          size={18}
+                          onClick={() => handleDownloadCV(candidato.documento, candidato.cvNombre || 'cv.pdf')}
+                          title="Descargar CV"
+                        />
+                        <span className="text-sm text-secondary-900">{candidato.cvNombre}</span>
+                      </span>
+                    ) : (
+                      <span className="text-secondary-400">CV no cargado aun</span>
+                    )}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-secondary-500">
-                    {formatDate(candidato.creadoEn)}
+                  <td className="px-6 py-4 text-center">
+                    {candidato.ultimaModificacion
+                      ? format(new Date(candidato.ultimaModificacion), 'dd-MM-yyyy HH:mm:ss')
+                      : candidato.creadoEn
+                        ? format(new Date(candidato.creadoEn), 'dd-MM-yyyy HH:mm:ss')
+                        : '-'}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <div className="flex justify-end space-x-2">
-                      <button
-                        onClick={() => onEdit(candidato)}
-                        className="text-primary-600 hover:text-primary-900"
-                      >
-                        Editar
+                  <td className="px-6 py-4 text-center">
+                    <div className="flex flex-row items-center justify-center gap-3">
+                      <button onClick={() => navigate('/candidatos/detalle', { state: { documento: candidato.documento } })} title="Ver">
+                        <FaEye className="text-blue-600 hover:text-blue-800" size={18} />
                       </button>
-                      <button
-                        onClick={() => onDelete(candidato.id!)}
-                        className="text-error-600 hover:text-error-900"
-                      >
-                        Eliminar
+                      <button onClick={() => navigate(`/candidatos/${candidato.documento}/editar`)} title="Editar">
+                        <FaEdit className="text-yellow-600 hover:text-yellow-800" size={18} />
+                      </button>
+                      <button onClick={() => onDelete(candidato.documento)} title="Eliminar">
+                        <FaTrash className="text-red-600 hover:text-red-800" size={18} />
                       </button>
                     </div>
                   </td>

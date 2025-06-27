@@ -55,11 +55,11 @@ class ApiService {
   }
 
   /**
-   * Obtiene un candidato por su ID
+   * Obtiene un candidato por su documento
    */
-  async getCandidatoById(id: number): Promise<IApiResponse<ICandidato>> {
+  async getCandidatoByDocumento(documento: string): Promise<IApiResponse<ICandidato>> {
     try {
-      const response = await this.api.get(`/candidatos/${id}`);
+      const response = await this.api.post('/candidatos/detalle', { documento });
       return response.data;
     } catch (error: any) {
       throw this.handleError(error);
@@ -78,6 +78,7 @@ class ApiService {
         Object.entries(candidato).forEach(([key, value]) => {
           if (key === 'cv' && value) {
             formData.append('cv', value as File);
+            formData.append('cvNombre', (value as File).name);
           } else if (value !== undefined && value !== null) {
             formData.append(key, value as string);
           }
@@ -95,7 +96,7 @@ class ApiService {
   /**
    * Actualiza un candidato existente
    */
-  async updateCandidato(id: number, candidato: ICandidatoUpdate): Promise<IApiResponse<ICandidato>> {
+  async updateCandidato(documento: string, candidato: ICandidatoUpdate): Promise<IApiResponse<ICandidato>> {
     try {
       let dataToSend: any = candidato;
       let config = {};
@@ -104,6 +105,7 @@ class ApiService {
         Object.entries(candidato).forEach(([key, value]) => {
           if (key === 'cv' && value) {
             formData.append('cv', value as File);
+            formData.append('cvNombre', (value as File).name);
           } else if (value !== undefined && value !== null) {
             formData.append(key, value as string);
           }
@@ -111,7 +113,7 @@ class ApiService {
         dataToSend = formData;
         config = { headers: { 'Content-Type': 'multipart/form-data' } };
       }
-      const response = await this.api.put(`/candidatos/${id}`, dataToSend, config);
+      const response = await this.api.put(`/candidatos/${documento}`, dataToSend, config);
       return response.data;
     } catch (error: any) {
       throw this.handleError(error);
@@ -121,9 +123,9 @@ class ApiService {
   /**
    * Elimina un candidato
    */
-  async deleteCandidato(id: number): Promise<IApiResponse<void>> {
+  async deleteCandidato(documento: string): Promise<IApiResponse<void>> {
     try {
-      const response = await this.api.delete(`/candidatos/${id}`);
+      const response = await this.api.delete(`/candidatos/${documento}`);
       return response.data;
     } catch (error: any) {
       throw this.handleError(error);

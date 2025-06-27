@@ -90,22 +90,32 @@ const CandidatoForm: React.FC<CandidatoFormProps> = ({
    */
   const handleFormSubmit = async (data: ICandidatoCreate) => {
     try {
-      // Enviar todos los campos, usando los valores actuales para los no modificados
-      const payload: ICandidatoCreate = {
-        ...candidato,
-        ...data,
-        cv: cvFile || undefined
-      };
+      let payload: any;
+      if (candidato && candidato.documento) {
+        // Edición: solo enviar campos editables y el documento
+        payload = {
+          ...data,
+          documento: candidato.documento,
+          cv: cvFile || undefined
+        };
+      } else {
+        // Creación: enviar todo
+        payload = {
+          ...data,
+          cv: cvFile || undefined
+        };
+      }
       await onSubmit(payload);
       reset();
       setCvFile(null);
     } catch (error: any) {
-      // Si el error es sobre el campo CV, mostrarlo como "CV"
-      if (error?.fieldErrors && (error.fieldErrors.cv || error.fieldErrors.CV)) {
-        setCvError(error.fieldErrors.cv || error.fieldErrors.CV);
-      } else {
-        console.error('Error al enviar formulario:', error);
+      // Mostrar errores de validación del backend
+      if (error?.fieldErrors) {
+        Object.entries(error.fieldErrors).forEach(([field, message]) => {
+          console.error(`${field}: ${message}`);
+        });
       }
+      // No hacer reset()
     }
   };
 
@@ -116,6 +126,33 @@ const CandidatoForm: React.FC<CandidatoFormProps> = ({
       </h2>
 
       <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
+        {/* Documento */}
+        <div>
+          <label htmlFor="documento" className="form-label">
+            Número de documento (DNI/Pasaporte) *
+          </label>
+          <input
+            id="documento"
+            type="text"
+            placeholder="Ej: 12345678A o X1234567"
+            {...register('documento', {
+              required: 'El número de documento es obligatorio',
+              maxLength: {
+                value: 20,
+                message: 'El documento no puede exceder 20 caracteres'
+              }
+            })}
+            className={`input-field ${errors.documento ? 'border-error-300' : ''}`}
+            maxLength={20}
+            readOnly={!!candidato?.documento}
+            disabled={!!candidato?.documento}
+            defaultValue={candidato?.documento || ''}
+          />
+          {errors.documento && (
+            <p className="form-error">{errors.documento.message}</p>
+          )}
+        </div>
+
         {/* Nombre y Apellido */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -244,18 +281,16 @@ const CandidatoForm: React.FC<CandidatoFormProps> = ({
           <label htmlFor="educacion" className="form-label">
             Educación
           </label>
-          <input
+          <textarea
             id="educacion"
-            type="text"
-            placeholder="Ej: Ingeniería Informática - Universidad Politécnica de Madrid (2018)"
             {...register('educacion', {
               maxLength: {
-                value: 200,
-                message: 'La educación no puede exceder 200 caracteres'
+                value: 1000,
+                message: 'La educación no puede exceder 1000 caracteres'
               }
             })}
-            className={`input-field ${errors.educacion ? 'border-error-300' : ''}`}
-            maxLength={200}
+            className={`input-field h-24 resize-y ${errors.educacion ? 'border-error-300' : ''}`}
+            placeholder="Ej: Grado en Psicología - Universidad Complutense de Madrid (2015-2019)\nMáster en RRHH - Universidad Autónoma de Madrid (2020-2021)"
           />
           {errors.educacion && (
             <p className="form-error">{errors.educacion.message}</p>

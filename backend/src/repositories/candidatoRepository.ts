@@ -75,71 +75,71 @@ export class CandidatoRepository {
   }
 
   /**
-   * Obtiene un candidato por su ID
-   * @param id ID del candidato
+   * Obtiene un candidato por su documento
+   * @param documento Documento del candidato
    * @returns Candidato encontrado o null
    */
-  async findById(id: number): Promise<ICandidato | null> {
+  async findByDocumento(documento: string): Promise<ICandidato | null> {
     try {
-      logger.info('Buscando candidato por ID', { id });
+      logger.info('Buscando candidato por documento', { documento });
       
       const candidato = await this.prisma.candidato.findUnique({
-        where: { id }
+        where: { documento }
       });
 
       if (candidato) {
-        logger.info('Candidato encontrado', { id });
+        logger.info('Candidato encontrado', { documento });
       } else {
-        logger.warn('Candidato no encontrado', { id });
+        logger.warn('Candidato no encontrado', { documento });
       }
 
       return candidato;
     } catch (error) {
-      logger.error('Error al buscar candidato por ID', { error, id });
+      logger.error('Error al buscar candidato por documento', { error, documento });
       throw error;
     }
   }
 
   /**
    * Actualiza un candidato existente
-   * @param id ID del candidato a actualizar
+   * @param documento Documento del candidato a actualizar
    * @param candidatoData Datos a actualizar
    * @returns Candidato actualizado
    */
-  async update(id: number, candidatoData: ICandidatoUpdate): Promise<ICandidato> {
+  async update(documento: string, candidatoData: ICandidatoUpdate): Promise<ICandidato> {
     try {
-      logger.info('Actualizando candidato', { id });
+      logger.info('Actualizando candidato', { documento });
       
       const candidato = await this.prisma.candidato.update({
-        where: { id },
+        where: { documento },
         data: candidatoData
       });
 
-      logger.info('Candidato actualizado exitosamente', { id });
+      logger.info('Candidato actualizado exitosamente', { documento });
       return candidato;
     } catch (error) {
-      logger.error('Error al actualizar candidato', { error, id });
+      logger.error('Error al actualizar candidato', { error, documento });
       throw error;
     }
   }
 
   /**
-   * Elimina un candidato por su ID
-   * @param id ID del candidato a eliminar
+   * Elimina un candidato por su documento
+   * @param documento Documento del candidato a eliminar
    * @returns true si se eliminó correctamente
    */
-  async delete(id: number): Promise<boolean> {
+  async delete(documento: string): Promise<boolean> {
     try {
-      logger.info('Eliminando candidato', { id });
+      logger.info('Eliminando candidato', { documento });
       
       await this.prisma.candidato.delete({
-        where: { id }
+        where: { documento }
       });
 
-      logger.info('Candidato eliminado exitosamente', { id });
+      logger.info('Candidato eliminado exitosamente', { documento });
       return true;
     } catch (error) {
-      logger.error('Error al eliminar candidato', { error, id });
+      logger.error('Error al eliminar candidato', { error, documento });
       throw error;
     }
   }
@@ -147,15 +147,15 @@ export class CandidatoRepository {
   /**
    * Verifica si existe un candidato con el email especificado
    * @param email Email a verificar
-   * @param excludeId ID del candidato a excluir (para updates)
+   * @param excludeDocumento Documento del candidato a excluir (para updates)
    * @returns true si existe, false en caso contrario
    */
-  async emailExists(email: string, excludeId?: number): Promise<boolean> {
+  async emailExists(email: string, excludeDocumento?: string): Promise<boolean> {
     try {
       const where: any = { email };
       
-      if (excludeId) {
-        where.id = { not: excludeId };
+      if (excludeDocumento) {
+        where.documento = { not: excludeDocumento };
       }
 
       const count = await this.prisma.candidato.count({ where });

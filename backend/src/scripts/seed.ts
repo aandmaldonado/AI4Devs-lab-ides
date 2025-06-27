@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import Database from '../config/database';
 import logger from '../config/logger';
+import fs from 'fs';
+import path from 'path';
 
 /**
  * Script para poblar la base de datos con datos dummy realistas
@@ -9,34 +11,68 @@ import logger from '../config/logger';
 
 const prisma = Database.getInstance();
 
+// Leer el PDF de ejemplo para el primer candidato
+const sampleCVPath = path.join(__dirname, '../../prisma/sample_cv.pdf');
+let sampleCVBuffer: Buffer | undefined = undefined;
+try {
+  sampleCVBuffer = fs.readFileSync(sampleCVPath);
+} catch (e) {
+  console.warn('No se pudo leer sample_cv.pdf, el primer candidato no tendrá CV de ejemplo.');
+}
+
 // Datos dummy realistas para candidatos
 const candidatosDummy = [
   {
+    documento: "12345678A",
     nombre: "María",
     apellido: "González",
     email: "maria.gonzalez@gmail.com",
     telefono: "+34 612 345 678",
     direccion: "Calle Mayor 123, Madrid, España",
     educacion: "Ingeniería Informática - Universidad Politécnica de Madrid (2018)",
-    experiencia: "Desarrolladora Full Stack en TechCorp (2019-2023), Especializada en React y Node.js"
+    experiencia: "Desarrolladora Full Stack en TechCorp (2019-2023), Especializada en React y Node.js",
+    cv: sampleCVBuffer,
+    cvNombre: sampleCVBuffer ? 'sample_cv.pdf' : undefined
   },
   {
-    nombre: "Carlos",
-    apellido: "Rodríguez",
-    email: "carlos.rodriguez@outlook.com",
-    telefono: "+34 623 456 789",
-    direccion: "Avenida de la Constitución 45, Barcelona, España",
-    educacion: "Administración de Empresas - ESADE (2017)",
-    experiencia: "Consultor Senior en McKinsey (2018-2023), Especializado en transformación digital"
+    documento: "X1234567",
+    nombre: "Juan",
+    apellido: "Pérez",
+    email: "juan.perez@gmail.com",
+    telefono: "+34 622 111 222",
+    direccion: "Avenida Diagonal 456, Barcelona, España",
+    educacion: "Ingeniería Industrial - UPC (2017)",
+    experiencia: "Ingeniero de procesos en Seat (2018-2023)"
   },
   {
-    nombre: "Ana",
+    documento: "98765432Z",
+    nombre: "Lucía",
     apellido: "Martínez",
-    email: "ana.martinez@yahoo.com",
-    telefono: "+34 634 567 890",
-    direccion: "Plaza España 67, Valencia, España",
-    educacion: "Derecho - Universidad de Valencia (2019)",
-    experiencia: "Abogada en Bufete Legal (2020-2023), Especializada en derecho laboral"
+    email: "lucia.martinez@gmail.com",
+    telefono: "+34 633 222 333",
+    direccion: "Gran Vía 789, Valencia, España",
+    educacion: "Psicología - Universidad de Valencia (2019)",
+    experiencia: "Psicóloga clínica en Hospital La Fe (2020-2023)"
+  },
+  {
+    documento: "Y7654321",
+    nombre: "Carlos",
+    apellido: "Sánchez",
+    email: "carlos.sanchez@gmail.com",
+    telefono: "+34 644 333 444",
+    direccion: "Calle Real 101, Sevilla, España",
+    educacion: "Derecho - Universidad de Sevilla (2016)",
+    experiencia: "Abogado en despacho propio (2017-2023)"
+  },
+  {
+    documento: "M1234567",
+    nombre: "Ana",
+    apellido: "López",
+    email: "ana.lopez@gmail.com",
+    telefono: "+34 655 444 555",
+    direccion: "Paseo de la Castellana 202, Madrid, España",
+    educacion: "ADE - Universidad Autónoma de Madrid (2015)",
+    experiencia: "Consultora en Deloitte (2016-2023)"
   },
   {
     nombre: "Luis",
@@ -146,7 +182,10 @@ const candidatosDummy = [
     educacion: "Historia del Arte - Universidad de Granada (2018)",
     experiencia: "Conservadora en Museo del Prado (2019-2023)"
   }
-];
+].map((c, idx) => ({
+  ...c,
+  documento: c.documento || `DUMMY${(idx + 1).toString().padStart(3, '0')}`
+}));
 
 /**
  * Función principal para ejecutar el seed

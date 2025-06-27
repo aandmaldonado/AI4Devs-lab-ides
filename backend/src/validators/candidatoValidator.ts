@@ -19,6 +19,17 @@ const emailSchema = Joi.string()
 
 // Esquema para crear candidato
 export const createCandidatoSchema = Joi.object<ICandidatoCreate>({
+  documento: Joi.string()
+    .min(5)
+    .max(20)
+    .required()
+    .messages({
+      'string.base': 'El número de documento debe ser un texto',
+      'string.empty': 'El número de documento es obligatorio',
+      'string.min': 'El número de documento debe tener al menos 5 caracteres',
+      'string.max': 'El número de documento no puede exceder 20 caracteres',
+      'any.required': 'El número de documento es obligatorio'
+    }),
   nombre: Joi.string()
     .min(1)
     .max(100)
@@ -75,6 +86,17 @@ export const createCandidatoSchema = Joi.object<ICandidatoCreate>({
 
 // Esquema para actualizar candidato (todos los campos opcionales)
 export const updateCandidatoSchema = Joi.object<ICandidatoUpdate>({
+  documento: Joi.string()
+    .min(5)
+    .max(20)
+    .required()
+    .messages({
+      'string.base': 'El número de documento debe ser un texto',
+      'string.empty': 'El número de documento es obligatorio',
+      'string.min': 'El número de documento debe tener al menos 5 caracteres',
+      'string.max': 'El número de documento no puede exceder 20 caracteres',
+      'any.required': 'El número de documento es obligatorio'
+    }),
   nombre: Joi.string()
     .min(1)
     .max(100)
@@ -131,6 +153,12 @@ export const updateCandidatoSchema = Joi.object<ICandidatoUpdate>({
     .optional()
     .messages({
       'binary.base': 'El campo CV debe ser un archivo PDF o DOCX',
+    }),
+  cvNombre: Joi.string()
+    .max(200)
+    .optional()
+    .messages({
+      'string.max': 'El nombre del archivo CV no puede exceder 200 caracteres'
     })
 }).unknown(false); // No permitir campos extra como id o creadoEn
 

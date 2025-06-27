@@ -4,7 +4,7 @@
  */
 
 export interface ICandidato {
-  id?: number;
+  documento: string;
   nombre: string;
   apellido: string;
   email: string;
@@ -17,6 +17,7 @@ export interface ICandidato {
 }
 
 export interface ICandidatoCreate {
+  documento: string;
   nombre: string;
   apellido: string;
   email: string;
@@ -25,9 +26,11 @@ export interface ICandidatoCreate {
   educacion?: string;
   experiencia?: string;
   cv?: Buffer;
+  cvNombre?: string;
 }
 
 export interface ICandidatoUpdate {
+  documento: string;
   nombre?: string;
   apellido?: string;
   email?: string;
@@ -36,6 +39,7 @@ export interface ICandidatoUpdate {
   educacion?: string;
   experiencia?: string;
   cv?: Buffer;
+  cvNombre?: string;
 }
 
 /**

@@ -22,7 +22,13 @@ export class CandidatoController {
   async createCandidato(req: Request, res: Response): Promise<void> {
     try {
       const candidatoData: ICandidatoCreate = req.body;
-      
+      // Si se subió un archivo, agregarlo al candidatoData
+      if (req.file) {
+        candidatoData.cv = req.file.buffer;
+        if (req.body.cvNombre) {
+          candidatoData.cvNombre = req.body.cvNombre;
+        }
+      }
       logger.info('Petición para crear candidato recibida', { 
         email: candidatoData.email,
         ip: req.ip 
@@ -82,37 +88,30 @@ export class CandidatoController {
   }
 
   /**
-   * Obtiene un candidato por su ID
-   * GET /candidatos/:id
+   * Obtiene un candidato por su documento
+   * GET /candidatos/:documento
    */
-  async getCandidatoById(req: Request, res: Response): Promise<void> {
+  async getCandidatoByDocumento(req: Request, res: Response): Promise<void> {
     try {
-      const id = parseInt(req.params.id);
-      
-      if (isNaN(id)) {
-        logger.warn('ID de candidato inválido en petición', { id: req.params.id });
+      const documento = req.params.documento;
+      if (!documento) {
+        logger.warn('Documento de candidato inválido en petición', { documento });
         res.status(400).json({
           success: false,
-          message: 'ID de candidato inválido',
-          error: 'ID inválido'
+          message: 'Documento de candidato inválido',
+          error: 'Documento inválido'
         });
         return;
       }
-
-      logger.info('Petición para obtener candidato por ID recibida', { 
-        id,
-        ip: req.ip 
-      });
-
-      const result = await this.candidatoService.getCandidatoById(id);
-
+      logger.info('Petición para obtener candidato por documento recibida', { documento, ip: req.ip });
+      const result = await this.candidatoService.getCandidatoByDocumento(documento);
       if (result.success) {
         res.status(200).json(result);
       } else {
         res.status(404).json(result);
       }
     } catch (error) {
-      logger.error('Error en controlador al obtener candidato por ID', { error });
+      logger.error('Error en controlador al obtener candidato por documento', { error });
       res.status(500).json({
         success: false,
         message: 'Error interno del servidor',
@@ -123,32 +122,30 @@ export class CandidatoController {
 
   /**
    * Actualiza un candidato existente
-   * PUT /candidatos/:id
+   * PUT /candidatos/:documento
    */
   async updateCandidato(req: Request, res: Response): Promise<void> {
     try {
-      const id = parseInt(req.params.id);
-      
-      if (isNaN(id)) {
-        logger.warn('ID de candidato inválido en petición de actualización', { id: req.params.id });
+      const documento = req.params.documento;
+      if (!documento) {
+        logger.warn('Documento de candidato inválido en petición de actualización', { documento });
         res.status(400).json({
           success: false,
-          message: 'ID de candidato inválido',
-          error: 'ID inválido'
+          message: 'Documento de candidato inválido',
+          error: 'Documento inválido'
         });
         return;
       }
-
       const candidatoData: ICandidatoUpdate = req.body;
-
-      logger.info('Petición para actualizar candidato recibida', { 
-        id,
-        email: candidatoData.email,
-        ip: req.ip 
-      });
-
-      const result = await this.candidatoService.updateCandidato(id, candidatoData);
-
+      // Si se subió un archivo, agregarlo al candidatoData
+      if (req.file) {
+        candidatoData.cv = req.file.buffer;
+        if (req.body.cvNombre) {
+          candidatoData.cvNombre = req.body.cvNombre;
+        }
+      }
+      logger.info('Petición para actualizar candidato recibida', { documento, email: candidatoData.email, ip: req.ip });
+      const result = await this.candidatoService.updateCandidato(documento, candidatoData);
       if (result.success) {
         res.status(200).json(result);
       } else {
@@ -165,30 +162,23 @@ export class CandidatoController {
   }
 
   /**
-   * Elimina un candidato por su ID
-   * DELETE /candidatos/:id
+   * Elimina un candidato por su documento
+   * DELETE /candidatos/:documento
    */
   async deleteCandidato(req: Request, res: Response): Promise<void> {
     try {
-      const id = parseInt(req.params.id);
-      
-      if (isNaN(id)) {
-        logger.warn('ID de candidato inválido en petición de eliminación', { id: req.params.id });
+      const documento = req.params.documento;
+      if (!documento) {
+        logger.warn('Documento de candidato inválido en petición de eliminación', { documento });
         res.status(400).json({
           success: false,
-          message: 'ID de candidato inválido',
-          error: 'ID inválido'
+          message: 'Documento de candidato inválido',
+          error: 'Documento inválido'
         });
         return;
       }
-
-      logger.info('Petición para eliminar candidato recibida', { 
-        id,
-        ip: req.ip 
-      });
-
-      const result = await this.candidatoService.deleteCandidato(id);
-
+      logger.info('Petición para eliminar candidato recibida', { documento, ip: req.ip });
+      const result = await this.candidatoService.deleteCandidato(documento);
       if (result.success) {
         res.status(200).json(result);
       } else {
@@ -201,6 +191,44 @@ export class CandidatoController {
         message: 'Error interno del servidor',
         error: 'Error interno'
       });
+    }
+  }
+
+  /**
+   * Descarga el CV de un candidato
+   * GET /candidatos/:documento/cv
+   */
+  async downloadCV(req: Request, res: Response): Promise<void> {
+    try {
+      const documento = req.params.documento;
+      if (!documento) {
+        res.status(400).json({ success: false, message: 'Documento de candidato inválido' });
+        return;
+      }
+      const result = await this.candidatoService.getCandidatoByDocumento(documento);
+      if (!result.success || !result.data || !(result.data as any).cv) {
+        res.status(404).json({ success: false, message: 'CV no encontrado para este candidato' });
+        return;
+      }
+      const candidato = result.data as any;
+      let buffer = candidato.cv;
+      if (buffer && buffer.type === 'Buffer' && Array.isArray(buffer.data)) {
+        buffer = Buffer.from(buffer.data);
+      }
+      const filename = candidato.cvNombre || 'cv.pdf';
+      // Determinar el tipo MIME por extensión
+      let mimeType = 'application/pdf';
+      if (filename.endsWith('.doc') || filename.endsWith('.docx')) {
+        mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+      } else if (filename.endsWith('.pdf')) {
+        mimeType = 'application/pdf';
+      }
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+      res.setHeader('Content-Type', mimeType);
+      res.send(buffer);
+    } catch (error) {
+      logger.error('Error al descargar CV', { error });
+      res.status(500).json({ success: false, message: 'Error interno al descargar el CV' });
     }
   }
 } 

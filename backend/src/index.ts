@@ -14,6 +14,8 @@ import {
 } from './middleware/security';
 import logger from './config/logger';
 import Database from './config/database';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc';
 
 // Cargar variables de entorno
 dotenv.config();
@@ -50,6 +52,25 @@ app.get('/', (req, res) => {
 
 // Rutas de la API
 app.use('/api/candidatos', candidatoRoutes);
+
+// Configuración de Swagger
+const swaggerDefinition = {
+  openapi: '3.0.0',
+  info: {
+    title: 'ATS API',
+    version: '1.0.0',
+    description: 'Documentación de la API del Sistema ATS',
+  },
+  servers: [
+    { url: `http://localhost:${process.env.PORT || 3010}` }
+  ],
+};
+const swaggerOptions = {
+  swaggerDefinition,
+  apis: ['./src/routes/*.ts'], // Documentar rutas con JSDoc
+};
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Middleware para manejo de rutas no encontradas
 app.use('*', (req: Request, res: Response) => {

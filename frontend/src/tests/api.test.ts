@@ -46,7 +46,7 @@ describe('API Service Error Handling', () => {
     (apiService as any).api.put = mockPut;
 
     try {
-      await apiService.updateCandidato(1, { nombre: '', email: 'invalid' });
+      await apiService.updateCandidato('DOC123', { documento: 'DOC123', nombre: '', email: 'invalid' });
     } catch (error: any) {
       expect(error.message).toBe('Datos de entrada inválidos');
       expect(error.fieldErrors).toBeDefined();
@@ -74,7 +74,7 @@ describe('API Service Error Handling', () => {
     (apiService as any).api.put = mockPut;
 
     try {
-      await apiService.updateCandidato(1, { nombre: 'Test' });
+      await apiService.updateCandidato('DOC123', { documento: 'DOC123', nombre: 'Test' });
     } catch (error: any) {
       expect(error.message).toBe('Error interno del servidor');
       expect(error.fieldErrors).toBeUndefined();
