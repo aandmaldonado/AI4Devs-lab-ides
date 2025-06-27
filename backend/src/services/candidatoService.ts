@@ -1,0 +1,228 @@
+import { CandidatoRepository } from '../repositories/candidatoRepository';
+import { ICandidato, ICandidatoCreate, ICandidatoUpdate, ICandidatoFilters, ICandidatoResponse } from '../types/candidato';
+import { validateCreateCandidato, validateUpdateCandidato } from '../validators/candidatoValidator';
+import logger from '../config/logger';
+
+/**
+ * Servicio de candidatos
+ * Implementa la lógica de negocio siguiendo principios SOLID
+ * Separa la lógica de negocio del acceso a datos
+ */
+export class CandidatoService {
+  private candidatoRepository: CandidatoRepository;
+
+  constructor() {
+    this.candidatoRepository = new CandidatoRepository();
+  }
+
+  /**
+   * Crea un nuevo candidato con validación
+   * @param candidatoData Datos del candidato
+   * @returns Respuesta con el candidato creado
+   */
+  async createCandidato(candidatoData: ICandidatoCreate): Promise<ICandidatoResponse> {
+    try {
+      // Validar datos de entrada
+      const validation = validateCreateCandidato(candidatoData);
+      if (validation.error) {
+        logger.warn('Validación fallida al crear candidato', { 
+          errors: validation.error.details,
+          email: candidatoData.email 
+        });
+        return {
+          success: false,
+          message: 'Datos de entrada inválidos',
+          error: validation.error.details.map(detail => detail.message).join(', ')
+        };
+      }
+
+      // Verificar si el email ya existe
+      const emailExists = await this.candidatoRepository.emailExists(candidatoData.email);
+      if (emailExists) {
+        logger.warn('Intento de crear candidato con email duplicado', { email: candidatoData.email });
+        return {
+          success: false,
+          message: 'Ya existe un candidato con este email',
+          error: 'Email duplicado'
+        };
+      }
+
+      // Crear candidato
+      const candidato = await this.candidatoRepository.create(candidatoData);
+      
+      logger.info('Candidato creado exitosamente', { id: candidato.id });
+      return {
+        success: true,
+        message: 'Candidato creado exitosamente',
+        data: candidato
+      };
+    } catch (error) {
+      logger.error('Error en servicio al crear candidato', { error });
+      return {
+        success: false,
+        message: 'Error interno del servidor',
+        error: 'Error interno'
+      };
+    }
+  }
+
+  /**
+   * Obtiene todos los candidatos con filtros opcionales
+   * @param filters Filtros de búsqueda
+   * @returns Respuesta con la lista de candidatos
+   */
+  async getCandidatos(filters: ICandidatoFilters = {}): Promise<ICandidatoResponse> {
+    try {
+      const candidatos = await this.candidatoRepository.findAll(filters);
+      
+      logger.info('Candidatos obtenidos exitosamente', { count: candidatos.length });
+      return {
+        success: true,
+        message: 'Candidatos obtenidos exitosamente',
+        data: candidatos
+      };
+    } catch (error) {
+      logger.error('Error en servicio al obtener candidatos', { error });
+      return {
+        success: false,
+        message: 'Error interno del servidor',
+        error: 'Error interno'
+      };
+    }
+  }
+
+  /**
+   * Obtiene un candidato por su ID
+   * @param id ID del candidato
+   * @returns Respuesta con el candidato encontrado
+   */
+  async getCandidatoById(id: number): Promise<ICandidatoResponse> {
+    try {
+      const candidato = await this.candidatoRepository.findById(id);
+      
+      if (!candidato) {
+        logger.warn('Candidato no encontrado', { id });
+        return {
+          success: false,
+          message: 'Candidato no encontrado',
+          error: 'Candidato no encontrado'
+        };
+      }
+
+      logger.info('Candidato obtenido exitosamente', { id });
+      return {
+        success: true,
+        message: 'Candidato obtenido exitosamente',
+        data: candidato
+      };
+    } catch (error) {
+      logger.error('Error en servicio al obtener candidato por ID', { error, id });
+      return {
+        success: false,
+        message: 'Error interno del servidor',
+        error: 'Error interno'
+      };
+    }
+  }
+
+  /**
+   * Actualiza un candidato existente
+   * @param id ID del candidato
+   * @param candidatoData Datos a actualizar
+   * @returns Respuesta con el candidato actualizado
+   */
+  async updateCandidato(id: number, candidatoData: ICandidatoUpdate): Promise<ICandidatoResponse> {
+    try {
+      // Validar datos de entrada
+      const validation = validateUpdateCandidato(candidatoData);
+      if (validation.error) {
+        logger.warn('Validación fallida al actualizar candidato', { 
+          errors: validation.error.details,
+          id 
+        });
+        return {
+          success: false,
+          message: 'Datos de entrada inválidos',
+          error: validation.error.details.map(detail => detail.message).join(', ')
+        };
+      }
+
+      // Verificar si el candidato existe
+      const existingCandidato = await this.candidatoRepository.findById(id);
+      if (!existingCandidato) {
+        logger.warn('Intento de actualizar candidato inexistente', { id });
+        return {
+          success: false,
+          message: 'Candidato no encontrado',
+          error: 'Candidato no encontrado'
+        };
+      }
+
+      // Si se está actualizando el email, verificar que no exista
+      if (candidatoData.email) {
+        const emailExists = await this.candidatoRepository.emailExists(candidatoData.email, id);
+        if (emailExists) {
+          logger.warn('Intento de actualizar candidato con email duplicado', { id, email: candidatoData.email });
+          return {
+            success: false,
+            message: 'Ya existe otro candidato con este email',
+            error: 'Email duplicado'
+          };
+        }
+      }
+
+      // Actualizar candidato
+      const candidato = await this.candidatoRepository.update(id, candidatoData);
+      
+      logger.info('Candidato actualizado exitosamente', { id });
+      return {
+        success: true,
+        message: 'Candidato actualizado exitosamente',
+        data: candidato
+      };
+    } catch (error) {
+      logger.error('Error en servicio al actualizar candidato', { error, id });
+      return {
+        success: false,
+        message: 'Error interno del servidor',
+        error: 'Error interno'
+      };
+    }
+  }
+
+  /**
+   * Elimina un candidato por su ID
+   * @param id ID del candidato
+   * @returns Respuesta de confirmación
+   */
+  async deleteCandidato(id: number): Promise<ICandidatoResponse> {
+    try {
+      // Verificar si el candidato existe
+      const existingCandidato = await this.candidatoRepository.findById(id);
+      if (!existingCandidato) {
+        logger.warn('Intento de eliminar candidato inexistente', { id });
+        return {
+          success: false,
+          message: 'Candidato no encontrado',
+          error: 'Candidato no encontrado'
+        };
+      }
+
+      // Eliminar candidato
+      await this.candidatoRepository.delete(id);
+      
+      logger.info('Candidato eliminado exitosamente', { id });
+      return {
+        success: true,
+        message: 'Candidato eliminado exitosamente'
+      };
+    } catch (error) {
+      logger.error('Error en servicio al eliminar candidato', { error, id });
+      return {
+        success: false,
+        message: 'Error interno del servidor',
+        error: 'Error interno'
+      };
+    }
+  }
+} 

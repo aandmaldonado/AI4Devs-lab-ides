@@ -1,95 +1,245 @@
-# LTI - Sistema de Seguimiento de Talento
+# LTI - Sistema de Seguimiento de Talento (ATS)
 
 Este proyecto es una aplicación full-stack con un frontend en React y un backend en Express usando Prisma como ORM. El frontend se inicia con Create React App y el backend está escrito en TypeScript.
 
-## Explicación de Directorios y Archivos
+## 🚀 Inicio Rápido
 
-- `backend/`: Contiene el código del lado del servidor escrito en Node.js.
-  - `src/`: Contiene el código fuente para el backend.
-    - `index.ts`: El punto de entrada para el servidor backend.
-  - `prisma/`: Contiene el archivo de esquema de Prisma para ORM.
-  - `tsconfig.json`: Archivo de configuración de TypeScript.
-  - `.env`: Contiene las variables de entorno.
-- `frontend/`: Contiene el código del lado del cliente escrito en React.
-  - `src/`: Contiene el código fuente para el frontend.
-  - `public/`: Contiene archivos estáticos como el archivo HTML e imágenes.
-  - `build/`: Contiene la construcción lista para producción del frontend.
-- `docker-compose.yml`: Contiene la configuración de Docker Compose para gestionar los servicios de tu aplicación.
-- `README.md`: Este archivo contiene información sobre el proyecto e instrucciones sobre cómo ejecutarlo.
+### Prerrequisitos
+- Node.js (v16 o superior)
+- Docker y Docker Compose
+- npm o yarn
 
-## Estructura del Proyecto
+### 1. Configurar la Base de Datos
+```bash
+# Iniciar PostgreSQL con Docker
+docker-compose up -d
+```
 
-El proyecto está dividido en dos directorios principales: `frontend` y `backend`.
+### 2. Instalar Dependencias
+```bash
+# Instalar todas las dependencias (backend y frontend)
+npm run install:all
 
-### Frontend
+# O instalar por separado:
+npm run install:backend
+npm run install:frontend
+```
 
-El frontend es una aplicación React y sus archivos principales están ubicados en el directorio `src`. El directorio `public` contiene activos estáticos y el directorio `build` contiene la construcción de producción de la aplicación.
+### 3. Configurar la Base de Datos
+```bash
+# Configurar Prisma y ejecutar migraciones
+npm run db:setup
 
-### Backend
+# O ejecutar paso a paso:
+npm run prisma:generate
+npm run prisma:migrate
+npm run prisma:seed
+```
 
-El backend es una aplicación Express escrita en TypeScript.
-- El directorio `src` contiene el código fuente
-- El directorio `prisma` contiene el esquema de Prisma.
+### 4. Iniciar la Aplicación
+```bash
+# Terminal 1: Iniciar backend
+npm run dev:backend
 
-## Primeros Pasos
+# Terminal 2: Iniciar frontend
+npm run dev:frontend
+```
 
-Para comenzar con este proyecto, sigue estos pasos:
+## 📁 Estructura del Proyecto
 
-1. Clona el repositorio.
-2. Instala las dependencias para el frontend y el backend:
-```sh
+```
+AI4Devs-lab-ides/
+├── backend/                 # Servidor Express + TypeScript
+│   ├── src/
+│   │   ├── config/         # Configuración (DB, Logger)
+│   │   ├── controllers/    # Controladores HTTP
+│   │   ├── services/       # Lógica de negocio
+│   │   ├── repositories/   # Acceso a datos
+│   │   ├── validators/     # Validaciones
+│   │   ├── types/          # Interfaces TypeScript
+│   │   ├── middleware/     # Middleware de seguridad
+│   │   ├── routes/         # Rutas RESTful
+│   │   └── scripts/        # Scripts de seed
+│   ├── prisma/             # Esquema de base de datos
+│   └── package.json
+├── frontend/               # Aplicación React + TypeScript
+│   ├── src/
+│   │   ├── components/     # Componentes React
+│   │   ├── services/       # Servicios de API
+│   │   └── types/          # Interfaces TypeScript
+│   └── package.json
+├── docs/                   # Documentación
+├── docker-compose.yml      # Configuración de Docker
+└── package.json           # Scripts del proyecto raíz
+```
+
+## 🔧 Comandos Disponibles
+
+### Desde el directorio raíz:
+```bash
+# Instalación
+npm run install:all         # Instalar backend y frontend
+npm run install:backend     # Solo backend
+npm run install:frontend    # Solo frontend
+
+# Base de datos
+npm run db:setup           # Configurar DB completa
+npm run prisma:generate    # Generar cliente Prisma
+npm run prisma:migrate     # Ejecutar migraciones
+npm run prisma:seed        # Poblar con datos dummy
+
+# Desarrollo
+npm run dev:backend        # Servidor backend (puerto 3010)
+npm run dev:frontend       # Servidor frontend (puerto 3000)
+
+# Build
+npm run build:backend      # Compilar backend
+npm run build:frontend     # Compilar frontend
+
+# Tests
+npm run test:backend       # Tests del backend
+npm run test:frontend      # Tests del frontend
+```
+
+### Desde el directorio backend:
+```bash
+cd backend
+npm install
+npm run prisma:generate
+npm run prisma:migrate
+npm run prisma:seed
+npm run dev
+```
+
+### Desde el directorio frontend:
+```bash
 cd frontend
 npm install
-
-cd ../backend
-npm install
-```
-3. Construye el servidor backend:
-```
-cd backend
-npm run build
-````
-4. Inicia el servidor backend:
-```
-cd backend
-npm run dev 
-```
-
-5. En una nueva ventana de terminal, construye el servidor frontend:
-```
-cd frontend
-npm run build
-```
-6. Inicia el servidor frontend:
-```
-cd frontend
 npm start
 ```
 
-El servidor backend estará corriendo en http://localhost:3010 y el frontend estará disponible en http://localhost:3000.
+## 🌐 Endpoints de la API
 
-## Docker y PostgreSQL
+- `GET /` - Información del servidor
+- `GET /health` - Health check
+- `GET /api/candidatos` - Listar candidatos
+- `POST /api/candidatos` - Crear candidato
+- `GET /api/candidatos/:id` - Obtener candidato
+- `PUT /api/candidatos/:id` - Actualizar candidato
+- `DELETE /api/candidatos/:id` - Eliminar candidato
 
-Este proyecto usa Docker para ejecutar una base de datos PostgreSQL. Así es cómo ponerlo en marcha:
+## 🗄️ Base de Datos
 
-Instala Docker en tu máquina si aún no lo has hecho. Puedes descargarlo desde aquí.
-Navega al directorio raíz del proyecto en tu terminal.
-Ejecuta el siguiente comando para iniciar el contenedor Docker:
+### Configuración PostgreSQL
+- **Host:** localhost
+- **Puerto:** 5432
+- **Usuario:** LTIdbUser
+- **Contraseña:** D1ymf8wyQEGthFR1E9xhCq
+- **Base de datos:** LTIdb
+
+### Modelo de Datos
+```prisma
+model Candidato {
+  id           Int      @id @default(autoincrement())
+  nombre       String   @db.VarChar(100)
+  apellido     String   @db.VarChar(100)
+  email        String   @unique @db.VarChar(150)
+  telefono     String?  @db.VarChar(20)
+  direccion    String?  @db.VarChar(200)
+  educacion    String?  @db.VarChar(200)
+  experiencia  String?  @db.VarChar(500)
+  cvUrl        String?  @db.VarChar(300)
+  creadoEn     DateTime @default(now())
+}
 ```
-docker-compose up -d
-```
-Esto iniciará una base de datos PostgreSQL en un contenedor Docker. La bandera -d corre el contenedor en modo separado, lo que significa que se ejecuta en segundo plano.
 
-Para acceder a la base de datos PostgreSQL, puedes usar cualquier cliente PostgreSQL con los siguientes detalles de conexión:
- - Host: localhost
- - Port: 5432
- - User: postgres
- - Password: password
- - Database: mydatabase
+## 🔒 Características de Seguridad
 
-Por favor, reemplaza User, Password y Database con el usuario, la contraseña y el nombre de la base de datos reales especificados en tu archivo .env.
+- **Rate Limiting:** 100 requests/minuto por IP
+- **Headers de Seguridad:** Helmet.js
+- **CORS:** Configurado para frontend
+- **Validación:** Joi para validación de datos
+- **Logging:** Winston para logging estructurado
+- **Sanitización:** Prevención de XSS e inyección SQL
 
-Para detener el contenedor Docker, ejecuta el siguiente comando:
+## 🎨 Frontend
+
+- **Framework:** React 18 + TypeScript
+- **Styling:** Tailwind CSS
+- **Formularios:** React Hook Form
+- **Notificaciones:** React Toastify
+- **HTTP Client:** Axios
+- **Diseño:** Responsivo y accesible
+
+## 🧪 Testing
+
+```bash
+# Backend tests
+npm run test:backend
+
+# Frontend tests
+npm run test:frontend
 ```
-docker-compose down
+
+- Los tests de backend validan el JSON real devuelto por el endpoint raíz (`/`).
+- Los tests de frontend usan la configuración por defecto de react-scripts para máxima compatibilidad.
+- Se recomienda usar mocks para dependencias externas (axios, react-toastify) en los tests de React.
+- Si se requiere soporte avanzado para ESModules, considerar migrar a Vite + Vitest o Next.js.
+
+## 🚨 Solución de Problemas
+
+### Error: "Could not read package.json"
+**Problema:** Ejecutar comandos de Prisma desde el directorio raíz.
+**Solución:** Usar los scripts del package.json raíz o navegar al directorio backend.
+
+### Error: "Debug Failure. False expression: Non-string value passed to ts.resolveTypeReferenceDirective"
+**Problema:** Conflicto de versiones entre TypeScript y ts-node al ejecutar `npm run prisma:seed`.
+**Solución:** 
+```bash
+# Actualizar versiones en backend/package.json
+npm install typescript@^5.3.3 ts-node@^10.9.2 ts-node-dev@^2.0.0
+# Reinstalar dependencias
+npm install
 ```
+
+### Error: "ReferenceError: cors is not defined"
+**Problema:** Falta importación de `cors` en `backend/src/index.ts`.
+**Solución:** 
+```typescript
+// Agregar esta importación en backend/src/index.ts
+import cors from 'cors';
+```
+
+### Error de conexión a la base de datos
+**Problema:** PostgreSQL no está ejecutándose.
+**Solución:** `docker-compose up -d`
+
+### Error de migración
+**Problema:** Esquema de Prisma no sincronizado.
+**Solución:** `npm run prisma:generate && npm run prisma:migrate`
+
+### Error: "TypeError: Cannot read properties of undefined (reading 'html')" en tests de frontend
+**Problema:** Incompatibilidad entre versiones de Jest, jsdom y/o ts-jest, especialmente con Node.js experimental.
+**Solución:**
+- Usar Node.js LTS (v20.x o v18.x) y limpiar/reinstalar dependencias.
+- Eliminar configuraciones personalizadas de Jest y usar la configuración por defecto de react-scripts.
+- Adaptar los tests para usar mocks en dependencias externas (axios, react-toastify).
+- Para tests TypeScript, asegurarse de que los archivos sean módulos (`export {}` al final si es necesario).
+
+## 📚 Documentación Adicional
+
+- [Requerimientos Técnicos](./docs/requerimientos.md)
+- [Historia de Usuario](./docs/hdu.md)
+- [Prompts Iniciales](./prompts-iniciales.md)
+
+## 🤝 Contribución
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia ISC. Ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
