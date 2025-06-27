@@ -32,14 +32,24 @@ const CandidatoForm: React.FC<CandidatoFormProps> = ({
     watch,
     reset
   } = useForm<ICandidatoCreate>({
-    defaultValues: candidato || {
+    defaultValues: candidato ? {
+      nombre: candidato.nombre || '',
+      apellido: candidato.apellido || '',
+      email: candidato.email || '',
+      telefono: candidato.telefono || '',
+      direccion: candidato.direccion || '',
+      educacion: candidato.educacion || '',
+      experiencia: candidato.experiencia || '',
+      cv: undefined
+    } : {
       nombre: '',
       apellido: '',
       email: '',
       telefono: '',
       direccion: '',
       educacion: '',
-      experiencia: ''
+      experiencia: '',
+      cv: undefined
     },
     mode: 'onChange'
   });
@@ -80,12 +90,22 @@ const CandidatoForm: React.FC<CandidatoFormProps> = ({
    */
   const handleFormSubmit = async (data: ICandidatoCreate) => {
     try {
-      // Aquí se podría subir el archivo CV si es necesario
-      await onSubmit(data);
+      // Enviar todos los campos, usando los valores actuales para los no modificados
+      const payload: ICandidatoCreate = {
+        ...candidato,
+        ...data,
+        cv: cvFile || undefined
+      };
+      await onSubmit(payload);
       reset();
       setCvFile(null);
-    } catch (error) {
-      console.error('Error al enviar formulario:', error);
+    } catch (error: any) {
+      // Si el error es sobre el campo CV, mostrarlo como "CV"
+      if (error?.fieldErrors && (error.fieldErrors.cv || error.fieldErrors.CV)) {
+        setCvError(error.fieldErrors.cv || error.fieldErrors.CV);
+      } else {
+        console.error('Error al enviar formulario:', error);
+      }
     }
   };
 

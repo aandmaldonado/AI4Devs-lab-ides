@@ -66,12 +66,10 @@ export const createCandidatoSchema = Joi.object<ICandidatoCreate>({
     .messages({
       'string.max': 'La experiencia no puede exceder 500 caracteres'
     }),
-  cvUrl: Joi.string()
-    .max(300)
+  cv: Joi.binary()
     .optional()
-    .allow('')
     .messages({
-      'string.max': 'La URL del CV no puede exceder 300 caracteres'
+      'binary.base': 'El campo CV debe ser un archivo PDF o DOCX',
     })
 });
 
@@ -129,14 +127,12 @@ export const updateCandidatoSchema = Joi.object<ICandidatoUpdate>({
     .messages({
       'string.max': 'La experiencia no puede exceder 500 caracteres'
     }),
-  cvUrl: Joi.string()
-    .max(300)
+  cv: Joi.binary()
     .optional()
-    .allow('')
     .messages({
-      'string.max': 'La URL del CV no puede exceder 300 caracteres'
+      'binary.base': 'El campo CV debe ser un archivo PDF o DOCX',
     })
-});
+}).unknown(false); // No permitir campos extra como id o creadoEn
 
 /**
  * Valida los datos de un candidato a crear
@@ -154,4 +150,26 @@ export const validateCreateCandidato = (data: any) => {
  */
 export const validateUpdateCandidato = (data: any) => {
   return updateCandidatoSchema.validate(data, { abortEarly: false });
-}; 
+};
+
+/**
+ * Traduce los mensajes técnicos de Joi a mensajes amigables para el usuario
+ */
+export function traducirMensajeCampo(field: string, message: string): string {
+  const traducciones: { [key: string]: string } = {
+    'cv': 'El campo CV',
+    'id': 'El campo ID',
+    'creadoEn': 'La fecha de creación',
+  };
+  let campo = traducciones[field] || field;
+  // Si el mensaje es de no permitido
+  if (message.includes('is not allowed')) {
+    return `${campo} no se puede modificar.`;
+  }
+  // Si el mensaje es de tipo
+  if (message.includes('must be a string')) {
+    return `${campo} debe ser un texto.`;
+  }
+  // Por defecto, devolver el mensaje original
+  return message.replace(field, campo);
+} 

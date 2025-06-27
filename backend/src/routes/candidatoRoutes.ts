@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { CandidatoController } from '../controllers/candidatoController';
+import multer from 'multer';
 
 /**
  * Router para endpoints de candidatos
@@ -7,9 +8,10 @@ import { CandidatoController } from '../controllers/candidatoController';
  */
 const router = Router();
 const candidatoController = new CandidatoController();
+const upload = multer();
 
 // POST /candidatos - Crear nuevo candidato
-router.post('/', candidatoController.createCandidato.bind(candidatoController));
+router.post('/', upload.single('cv'), candidatoController.createCandidato.bind(candidatoController));
 
 // GET /candidatos - Obtener todos los candidatos (con filtros opcionales)
 router.get('/', candidatoController.getCandidatos.bind(candidatoController));
@@ -18,7 +20,7 @@ router.get('/', candidatoController.getCandidatos.bind(candidatoController));
 router.get('/:id', candidatoController.getCandidatoById.bind(candidatoController));
 
 // PUT /candidatos/:id - Actualizar candidato existente
-router.put('/:id', candidatoController.updateCandidato.bind(candidatoController));
+router.put('/:id', upload.single('cv'), candidatoController.updateCandidato.bind(candidatoController));
 
 // DELETE /candidatos/:id - Eliminar candidato
 router.delete('/:id', candidatoController.deleteCandidato.bind(candidatoController));

@@ -71,7 +71,21 @@ class ApiService {
    */
   async createCandidato(candidato: ICandidatoCreate): Promise<IApiResponse<ICandidato>> {
     try {
-      const response = await this.api.post('/candidatos', candidato);
+      let dataToSend: any = candidato;
+      let config = {};
+      if (candidato.cv instanceof File) {
+        const formData = new FormData();
+        Object.entries(candidato).forEach(([key, value]) => {
+          if (key === 'cv' && value) {
+            formData.append('cv', value as File);
+          } else if (value !== undefined && value !== null) {
+            formData.append(key, value as string);
+          }
+        });
+        dataToSend = formData;
+        config = { headers: { 'Content-Type': 'multipart/form-data' } };
+      }
+      const response = await this.api.post('/candidatos', dataToSend, config);
       return response.data;
     } catch (error: any) {
       throw this.handleError(error);
@@ -83,7 +97,21 @@ class ApiService {
    */
   async updateCandidato(id: number, candidato: ICandidatoUpdate): Promise<IApiResponse<ICandidato>> {
     try {
-      const response = await this.api.put(`/candidatos/${id}`, candidato);
+      let dataToSend: any = candidato;
+      let config = {};
+      if (candidato.cv instanceof File) {
+        const formData = new FormData();
+        Object.entries(candidato).forEach(([key, value]) => {
+          if (key === 'cv' && value) {
+            formData.append('cv', value as File);
+          } else if (value !== undefined && value !== null) {
+            formData.append(key, value as string);
+          }
+        });
+        dataToSend = formData;
+        config = { headers: { 'Content-Type': 'multipart/form-data' } };
+      }
+      const response = await this.api.put(`/candidatos/${id}`, dataToSend, config);
       return response.data;
     } catch (error: any) {
       throw this.handleError(error);

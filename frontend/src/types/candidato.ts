@@ -12,7 +12,7 @@ export interface ICandidato {
   direccion?: string;
   educacion?: string;
   experiencia?: string;
-  cvUrl?: string;
+  cv?: File | null;
   creadoEn?: Date;
 }
 
@@ -24,7 +24,7 @@ export interface ICandidatoCreate {
   direccion?: string;
   educacion?: string;
   experiencia?: string;
-  cvUrl?: string;
+  cv?: File;
 }
 
 export interface ICandidatoUpdate {
@@ -35,7 +35,7 @@ export interface ICandidatoUpdate {
   direccion?: string;
   educacion?: string;
   experiencia?: string;
-  cvUrl?: string;
+  cv?: File;
 }
 
 /**

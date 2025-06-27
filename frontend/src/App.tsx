@@ -76,10 +76,32 @@ function App() {
    */
   const handleUpdateCandidato = async (data: ICandidatoUpdate) => {
     if (!editingCandidato?.id) return;
-    
+
+    // Solo enviar campos editables
+    const {
+      nombre,
+      apellido,
+      email,
+      telefono,
+      direccion,
+      educacion,
+      experiencia,
+      cv
+    } = data;
+    const updatePayload: ICandidatoUpdate = {
+      nombre,
+      apellido,
+      email,
+      telefono,
+      direccion,
+      educacion,
+      experiencia,
+      cv
+    };
+
     setIsSubmitting(true);
     try {
-      const response = await apiService.updateCandidato(editingCandidato.id, data);
+      const response = await apiService.updateCandidato(editingCandidato.id, updatePayload);
       if (response.success) {
         toast.success('Candidato actualizado exitosamente');
         setShowForm(false);

@@ -290,3 +290,258 @@
 {"count":15,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T01:47:22.347Z"}
 {"count":15,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T01:47:22.348Z"}
 {"duration":"6ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":200,"timestamp":"2025-06-27T01:47:22.349Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"duration":"7ms","ip":"::1","level":"info","message":"HTTP Request","method":"OPTIONS","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:32:40.637Z","url":"/api/candidatos/46","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"email":"maria.gonzalez@gmail.com","id":46,"ip":"::1","level":"info","message":"Petición para actualizar candidato recibida","service":"ats-backend","timestamp":"2025-06-27T07:32:40.649Z"}
+{"errors":[{"context":{"key":"cvUrl","label":"cvUrl","value":null},"message":"\"cvUrl\" must be a string","path":["cvUrl"],"type":"string.base"},{"context":{"child":"id","key":"id","label":"id","value":46},"message":"\"id\" is not allowed","path":["id"],"type":"object.unknown"},{"context":{"child":"creadoEn","key":"creadoEn","label":"creadoEn","value":"2025-06-27T00:51:35.864Z"},"message":"\"creadoEn\" is not allowed","path":["creadoEn"],"type":"object.unknown"}],"id":46,"level":"warn","message":"Validación fallida al actualizar candidato","service":"ats-backend","timestamp":"2025-06-27T07:32:40.658Z"}
+{"duration":"20ms","ip":"::1","level":"info","message":"HTTP Request","method":"PUT","service":"ats-backend","status":400,"timestamp":"2025-06-27T07:32:40.664Z","url":"/46","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"OPTIONS","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:32:50.162Z","url":"/api/candidatos/46","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"email":"maria.gonzalez@gmail.com","id":46,"ip":"::1","level":"info","message":"Petición para actualizar candidato recibida","service":"ats-backend","timestamp":"2025-06-27T07:32:50.170Z"}
+{"errors":[{"context":{"key":"cvUrl","label":"cvUrl","value":null},"message":"\"cvUrl\" must be a string","path":["cvUrl"],"type":"string.base"},{"context":{"child":"id","key":"id","label":"id","value":46},"message":"\"id\" is not allowed","path":["id"],"type":"object.unknown"},{"context":{"child":"creadoEn","key":"creadoEn","label":"creadoEn","value":"2025-06-27T00:51:35.864Z"},"message":"\"creadoEn\" is not allowed","path":["creadoEn"],"type":"object.unknown"}],"id":46,"level":"warn","message":"Validación fallida al actualizar candidato","service":"ats-backend","timestamp":"2025-06-27T07:32:50.171Z"}
+{"duration":"3ms","ip":"::1","level":"info","message":"HTTP Request","method":"PUT","service":"ats-backend","status":400,"timestamp":"2025-06-27T07:32:50.172Z","url":"/46","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T07:39:10.482Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T07:39:10.512Z"}
+{"count":15,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:39:10.870Z"}
+{"count":15,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:39:10.871Z"}
+{"duration":"399ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":304,"timestamp":"2025-06-27T07:39:10.874Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Recibida señal SIGTERM, cerrando servidor...","service":"ats-backend","timestamp":"2025-06-27T07:39:14.208Z"}
+{"level":"info","message":"Conexión a la base de datos establecida correctamente","service":"ats-backend","timestamp":"2025-06-27T07:39:22.563Z"}
+{"level":"info","message":"Servidor iniciado correctamente en el puerto 3010","service":"ats-backend","timestamp":"2025-06-27T07:39:22.579Z"}
+{"level":"info","message":"Health check disponible en: http://localhost:3010/health","service":"ats-backend","timestamp":"2025-06-27T07:39:22.580Z"}
+{"level":"info","message":"API de candidatos disponible en: http://localhost:3010/api/candidatos","service":"ats-backend","timestamp":"2025-06-27T07:39:22.580Z"}
+{"duration":"4ms","ip":"::ffff:127.0.0.1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:39:35.031Z","url":"/"}
+{"email":"invalid-email","ip":"::ffff:127.0.0.1","level":"info","message":"Petición para crear candidato recibida","service":"ats-backend","timestamp":"2025-06-27T07:39:35.052Z"}
+{"email":"invalid-email","errors":[{"context":{"key":"nombre","label":"nombre","value":""},"message":"\"nombre\" is not allowed to be empty","path":["nombre"],"type":"string.empty"},{"context":{"key":"apellido","label":"apellido","limit":100,"value":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},"message":"El apellido no puede exceder 100 caracteres","path":["apellido"],"type":"string.max"},{"context":{"invalids":["invalid-email"],"key":"email","label":"email","value":"invalid-email"},"message":"El formato del email no es válido","path":["email"],"type":"string.email"},{"context":{"key":"telefono","label":"telefono","limit":20,"value":"123456789012345678901"},"message":"El teléfono no puede exceder 20 caracteres","path":["telefono"],"type":"string.max"}],"level":"warn","message":"Validación fallida al crear candidato","service":"ats-backend","timestamp":"2025-06-27T07:39:35.054Z"}
+{"duration":"14ms","ip":"::ffff:127.0.0.1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":400,"timestamp":"2025-06-27T07:39:35.055Z","url":"/"}
+{"email":"invalid-email","id":1,"ip":"::ffff:127.0.0.1","level":"info","message":"Petición para actualizar candidato recibida","service":"ats-backend","timestamp":"2025-06-27T07:39:35.060Z"}
+{"errors":[{"context":{"key":"nombre","label":"nombre","value":""},"message":"\"nombre\" is not allowed to be empty","path":["nombre"],"type":"string.empty"},{"context":{"invalids":["invalid-email"],"key":"email","label":"email","value":"invalid-email"},"message":"El formato del email no es válido","path":["email"],"type":"string.email"},{"context":{"key":"telefono","label":"telefono","limit":20,"value":"123456789012345678901"},"message":"El teléfono no puede exceder 20 caracteres","path":["telefono"],"type":"string.max"}],"id":1,"level":"warn","message":"Validación fallida al actualizar candidato","service":"ats-backend","timestamp":"2025-06-27T07:39:35.061Z"}
+{"duration":"6ms","ip":"::ffff:127.0.0.1","level":"info","message":"HTTP Request","method":"PUT","service":"ats-backend","status":400,"timestamp":"2025-06-27T07:39:35.065Z","url":"/1"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T07:40:07.382Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T07:40:07.383Z"}
+{"count":15,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:40:07.405Z"}
+{"count":15,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:40:07.405Z"}
+{"duration":"27ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":304,"timestamp":"2025-06-27T07:40:07.408Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T07:40:07.409Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T07:40:07.410Z"}
+{"count":15,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:40:07.411Z"}
+{"count":15,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:40:07.411Z"}
+{"duration":"3ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":304,"timestamp":"2025-06-27T07:40:07.412Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T07:40:10.433Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T07:40:10.434Z"}
+{"count":15,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:40:10.438Z"}
+{"count":15,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:40:10.438Z"}
+{"duration":"6ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":304,"timestamp":"2025-06-27T07:40:10.439Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T07:40:10.441Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T07:40:10.441Z"}
+{"count":15,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:40:10.443Z"}
+{"count":15,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:40:10.443Z"}
+{"duration":"3ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":304,"timestamp":"2025-06-27T07:40:10.444Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"duration":"2ms","ip":"::1","level":"info","message":"HTTP Request","method":"OPTIONS","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:41:15.376Z","url":"/api/candidatos","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"email":"alvaro.maldonado1988@gmail.com","ip":"::1","level":"info","message":"Petición para crear candidato recibida","service":"ats-backend","timestamp":"2025-06-27T07:41:15.396Z"}
+{"email":"alvaro.maldonado1988@gmail.com","level":"info","message":"Creando nuevo candidato","service":"ats-backend","timestamp":"2025-06-27T07:41:15.417Z"}
+{"id":64,"level":"info","message":"Candidato creado exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:41:15.437Z"}
+{"id":64,"level":"info","message":"Candidato creado exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:41:15.437Z"}
+{"duration":"60ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":201,"timestamp":"2025-06-27T07:41:15.438Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T07:41:15.444Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T07:41:15.444Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:41:15.447Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:41:15.448Z"}
+{"duration":"5ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:41:15.449Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"OPTIONS","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:41:33.414Z","url":"/api/candidatos/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"email":"alvaro.maldonado1988@gmail.com","id":64,"ip":"::1","level":"info","message":"Petición para actualizar candidato recibida","service":"ats-backend","timestamp":"2025-06-27T07:41:33.419Z"}
+{"errors":[{"context":{"key":"cvUrl","label":"cvUrl","value":null},"message":"\"cvUrl\" must be a string","path":["cvUrl"],"type":"string.base"}],"id":64,"level":"warn","message":"Validación fallida al actualizar candidato","service":"ats-backend","timestamp":"2025-06-27T07:41:33.422Z"}
+{"duration":"8ms","ip":"::1","level":"info","message":"HTTP Request","method":"PUT","service":"ats-backend","status":400,"timestamp":"2025-06-27T07:41:33.424Z","url":"/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"OPTIONS","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:42:07.370Z","url":"/api/candidatos/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"email":"alvaro.maldonado1988@gmail.com","id":64,"ip":"::1","level":"info","message":"Petición para actualizar candidato recibida","service":"ats-backend","timestamp":"2025-06-27T07:42:07.375Z"}
+{"errors":[{"context":{"key":"cvUrl","label":"cvUrl","value":null},"message":"\"cvUrl\" must be a string","path":["cvUrl"],"type":"string.base"}],"id":64,"level":"warn","message":"Validación fallida al actualizar candidato","service":"ats-backend","timestamp":"2025-06-27T07:42:07.376Z"}
+{"duration":"3ms","ip":"::1","level":"info","message":"HTTP Request","method":"PUT","service":"ats-backend","status":400,"timestamp":"2025-06-27T07:42:07.377Z","url":"/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"OPTIONS","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:42:52.384Z","url":"/api/candidatos/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"email":"alvaro.maldonado1988@gmail.com","id":64,"ip":"::1","level":"info","message":"Petición para actualizar candidato recibida","service":"ats-backend","timestamp":"2025-06-27T07:42:52.387Z"}
+{"errors":[{"context":{"key":"cvUrl","label":"cvUrl","value":null},"message":"\"cvUrl\" must be a string","path":["cvUrl"],"type":"string.base"}],"id":64,"level":"warn","message":"Validación fallida al actualizar candidato","service":"ats-backend","timestamp":"2025-06-27T07:42:52.389Z"}
+{"duration":"4ms","ip":"::1","level":"info","message":"HTTP Request","method":"PUT","service":"ats-backend","status":400,"timestamp":"2025-06-27T07:42:52.390Z","url":"/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T07:46:51.542Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T07:46:51.542Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:46:51.615Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:46:51.615Z"}
+{"duration":"75ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":304,"timestamp":"2025-06-27T07:46:51.616Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T07:46:51.618Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T07:46:51.618Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:46:51.621Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:46:51.621Z"}
+{"duration":"4ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":304,"timestamp":"2025-06-27T07:46:51.622Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"OPTIONS","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:47:00.803Z","url":"/api/candidatos/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"email":"alvaro.maldonado1988@gmail.com","id":64,"ip":"::1","level":"info","message":"Petición para actualizar candidato recibida","service":"ats-backend","timestamp":"2025-06-27T07:47:00.806Z"}
+{"id":64,"level":"info","message":"Buscando candidato por ID","service":"ats-backend","timestamp":"2025-06-27T07:47:00.808Z"}
+{"id":64,"level":"info","message":"Candidato encontrado","service":"ats-backend","timestamp":"2025-06-27T07:47:00.816Z"}
+{"id":64,"level":"info","message":"Actualizando candidato","service":"ats-backend","timestamp":"2025-06-27T07:47:00.824Z"}
+{"id":64,"level":"info","message":"Candidato actualizado exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:00.835Z"}
+{"id":64,"level":"info","message":"Candidato actualizado exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:00.835Z"}
+{"duration":"32ms","ip":"::1","level":"info","message":"HTTP Request","method":"PUT","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:47:00.837Z","url":"/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T07:47:00.842Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T07:47:00.842Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:00.845Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:00.845Z"}
+{"duration":"5ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:47:00.846Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:47:15.547Z","url":"/api/candidatos/upload-cv"}
+{"duration":"2ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:47:15.548Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:47:19.022Z","url":"/api/candidatos/upload-cv"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:47:19.023Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:47:19.538Z","url":"/api/candidatos/upload-cv"}
+{"duration":"2ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:47:19.539Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:47:19.704Z","url":"/api/candidatos/upload-cv"}
+{"duration":"4ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:47:19.707Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:47:19.903Z","url":"/api/candidatos/upload-cv"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:47:19.904Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"OPTIONS","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:47:34.342Z","url":"/api/candidatos/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"email":"alvaro.maldonado1988@gmail.com","id":64,"ip":"::1","level":"info","message":"Petición para actualizar candidato recibida","service":"ats-backend","timestamp":"2025-06-27T07:47:34.345Z"}
+{"id":64,"level":"info","message":"Buscando candidato por ID","service":"ats-backend","timestamp":"2025-06-27T07:47:34.346Z"}
+{"id":64,"level":"info","message":"Candidato encontrado","service":"ats-backend","timestamp":"2025-06-27T07:47:34.356Z"}
+{"id":64,"level":"info","message":"Actualizando candidato","service":"ats-backend","timestamp":"2025-06-27T07:47:34.358Z"}
+{"id":64,"level":"info","message":"Candidato actualizado exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:34.364Z"}
+{"id":64,"level":"info","message":"Candidato actualizado exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:34.364Z"}
+{"duration":"21ms","ip":"::1","level":"info","message":"HTTP Request","method":"PUT","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:47:34.365Z","url":"/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T07:47:34.369Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T07:47:34.369Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:34.374Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:34.374Z"}
+{"duration":"6ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:47:34.375Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"duration":"0ms","ip":"::1","level":"info","message":"HTTP Request","method":"OPTIONS","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:47:44.391Z","url":"/api/candidatos/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"email":"alvaro.maldonado1988@gmail.com","id":64,"ip":"::1","level":"info","message":"Petición para actualizar candidato recibida","service":"ats-backend","timestamp":"2025-06-27T07:47:44.393Z"}
+{"id":64,"level":"info","message":"Buscando candidato por ID","service":"ats-backend","timestamp":"2025-06-27T07:47:44.394Z"}
+{"id":64,"level":"info","message":"Candidato encontrado","service":"ats-backend","timestamp":"2025-06-27T07:47:44.397Z"}
+{"id":64,"level":"info","message":"Actualizando candidato","service":"ats-backend","timestamp":"2025-06-27T07:47:44.399Z"}
+{"id":64,"level":"info","message":"Candidato actualizado exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:44.405Z"}
+{"id":64,"level":"info","message":"Candidato actualizado exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:44.405Z"}
+{"duration":"14ms","ip":"::1","level":"info","message":"HTTP Request","method":"PUT","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:47:44.406Z","url":"/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T07:47:44.410Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T07:47:44.410Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:44.413Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:44.414Z"}
+{"duration":"6ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:47:44.415Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"OPTIONS","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:47:53.038Z","url":"/api/candidatos/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"email":"alvaro.maldonado1988@gmail.com","id":64,"ip":"::1","level":"info","message":"Petición para actualizar candidato recibida","service":"ats-backend","timestamp":"2025-06-27T07:47:53.039Z"}
+{"id":64,"level":"info","message":"Buscando candidato por ID","service":"ats-backend","timestamp":"2025-06-27T07:47:53.040Z"}
+{"id":64,"level":"info","message":"Candidato encontrado","service":"ats-backend","timestamp":"2025-06-27T07:47:53.047Z"}
+{"id":64,"level":"info","message":"Actualizando candidato","service":"ats-backend","timestamp":"2025-06-27T07:47:53.052Z"}
+{"id":64,"level":"info","message":"Candidato actualizado exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:53.056Z"}
+{"id":64,"level":"info","message":"Candidato actualizado exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:53.056Z"}
+{"duration":"18ms","ip":"::1","level":"info","message":"HTTP Request","method":"PUT","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:47:53.057Z","url":"/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T07:47:53.062Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T07:47:53.063Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:53.066Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:47:53.066Z"}
+{"duration":"5ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:47:53.067Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"OPTIONS","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:48:23.508Z","url":"/api/candidatos/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"email":"alvaro.maldonado1988@gmail.com","id":64,"ip":"::1","level":"info","message":"Petición para actualizar candidato recibida","service":"ats-backend","timestamp":"2025-06-27T07:48:23.512Z"}
+{"id":64,"level":"info","message":"Buscando candidato por ID","service":"ats-backend","timestamp":"2025-06-27T07:48:23.514Z"}
+{"id":64,"level":"info","message":"Candidato encontrado","service":"ats-backend","timestamp":"2025-06-27T07:48:23.522Z"}
+{"id":64,"level":"info","message":"Actualizando candidato","service":"ats-backend","timestamp":"2025-06-27T07:48:23.525Z"}
+{"id":64,"level":"info","message":"Candidato actualizado exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:48:23.529Z"}
+{"id":64,"level":"info","message":"Candidato actualizado exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:48:23.529Z"}
+{"duration":"20ms","ip":"::1","level":"info","message":"HTTP Request","method":"PUT","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:48:23.530Z","url":"/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T07:48:23.534Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T07:48:23.534Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:48:23.538Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T07:48:23.539Z"}
+{"duration":"5ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":200,"timestamp":"2025-06-27T07:48:23.539Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:48:32.809Z","url":"/api/candidatos/upload-cv"}
+{"duration":"3ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:48:32.811Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:48:33.620Z","url":"/api/candidatos/upload-cv"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:48:33.621Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:48:33.804Z","url":"/api/candidatos/upload-cv"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:48:33.805Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:48:34.004Z","url":"/api/candidatos/upload-cv"}
+{"duration":"2ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:48:34.005Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:48:34.186Z","url":"/api/candidatos/upload-cv"}
+{"duration":"2ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:48:34.187Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:48:34.370Z","url":"/api/candidatos/upload-cv"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:48:34.371Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:48:34.550Z","url":"/api/candidatos/upload-cv"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:48:34.551Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:48:34.718Z","url":"/api/candidatos/upload-cv"}
+{"duration":"0ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:48:34.718Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:48:34.938Z","url":"/api/candidatos/upload-cv"}
+{"duration":"2ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:48:34.939Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:48:35.121Z","url":"/api/candidatos/upload-cv"}
+{"duration":"2ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:48:35.122Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:48:35.337Z","url":"/api/candidatos/upload-cv"}
+{"duration":"2ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:48:35.338Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"warn","message":"Ruta no encontrada","method":"POST","service":"ats-backend","timestamp":"2025-06-27T07:49:01.774Z","url":"/api/candidatos/upload-cv"}
+{"duration":"2ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"ats-backend","status":404,"timestamp":"2025-06-27T07:49:01.776Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Recibida señal SIGTERM, cerrando servidor...","service":"ats-backend","timestamp":"2025-06-27T08:02:15.481Z"}
+{"level":"info","message":"Conexión a la base de datos establecida correctamente","service":"ats-backend","timestamp":"2025-06-27T08:02:16.219Z"}
+{"level":"info","message":"Servidor iniciado correctamente en el puerto 3010","service":"ats-backend","timestamp":"2025-06-27T08:02:16.226Z"}
+{"level":"info","message":"Health check disponible en: http://localhost:3010/health","service":"ats-backend","timestamp":"2025-06-27T08:02:16.226Z"}
+{"level":"info","message":"API de candidatos disponible en: http://localhost:3010/api/candidatos","service":"ats-backend","timestamp":"2025-06-27T08:02:16.226Z"}
+{"level":"info","message":"Recibida señal SIGTERM, cerrando servidor...","service":"ats-backend","timestamp":"2025-06-27T08:02:16.579Z"}
+{"level":"info","message":"Conexión a la base de datos establecida correctamente","service":"ats-backend","timestamp":"2025-06-27T08:02:16.894Z"}
+{"level":"info","message":"Servidor iniciado correctamente en el puerto 3010","service":"ats-backend","timestamp":"2025-06-27T08:02:16.898Z"}
+{"level":"info","message":"Health check disponible en: http://localhost:3010/health","service":"ats-backend","timestamp":"2025-06-27T08:02:16.898Z"}
+{"level":"info","message":"API de candidatos disponible en: http://localhost:3010/api/candidatos","service":"ats-backend","timestamp":"2025-06-27T08:02:16.899Z"}
+{"level":"info","message":"Recibida señal SIGTERM, cerrando servidor...","service":"ats-backend","timestamp":"2025-06-27T08:02:49.066Z"}
+{"level":"info","message":"Conexión a la base de datos establecida correctamente","service":"ats-backend","timestamp":"2025-06-27T08:02:49.358Z"}
+{"level":"info","message":"Servidor iniciado correctamente en el puerto 3010","service":"ats-backend","timestamp":"2025-06-27T08:02:49.361Z"}
+{"level":"info","message":"Health check disponible en: http://localhost:3010/health","service":"ats-backend","timestamp":"2025-06-27T08:02:49.361Z"}
+{"level":"info","message":"API de candidatos disponible en: http://localhost:3010/api/candidatos","service":"ats-backend","timestamp":"2025-06-27T08:02:49.361Z"}
+{"level":"info","message":"Recibida señal SIGTERM, cerrando servidor...","service":"ats-backend","timestamp":"2025-06-27T08:03:02.116Z"}
+{"level":"info","message":"Conexión a la base de datos establecida correctamente","service":"ats-backend","timestamp":"2025-06-27T08:03:02.405Z"}
+{"level":"info","message":"Servidor iniciado correctamente en el puerto 3010","service":"ats-backend","timestamp":"2025-06-27T08:03:02.408Z"}
+{"level":"info","message":"Health check disponible en: http://localhost:3010/health","service":"ats-backend","timestamp":"2025-06-27T08:03:02.408Z"}
+{"level":"info","message":"API de candidatos disponible en: http://localhost:3010/api/candidatos","service":"ats-backend","timestamp":"2025-06-27T08:03:02.408Z"}
+{"level":"info","message":"Recibida señal SIGTERM, cerrando servidor...","service":"ats-backend","timestamp":"2025-06-27T08:03:03.366Z"}
+{"level":"info","message":"Conexión a la base de datos establecida correctamente","service":"ats-backend","timestamp":"2025-06-27T08:03:03.548Z"}
+{"level":"info","message":"Servidor iniciado correctamente en el puerto 3010","service":"ats-backend","timestamp":"2025-06-27T08:03:03.551Z"}
+{"level":"info","message":"Health check disponible en: http://localhost:3010/health","service":"ats-backend","timestamp":"2025-06-27T08:03:03.551Z"}
+{"level":"info","message":"API de candidatos disponible en: http://localhost:3010/api/candidatos","service":"ats-backend","timestamp":"2025-06-27T08:03:03.551Z"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T08:03:22.330Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T08:03:22.331Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:03:22.352Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:03:22.353Z"}
+{"duration":"28ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":200,"timestamp":"2025-06-27T08:03:22.357Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T08:04:23.580Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T08:04:23.581Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:04:23.589Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:04:23.589Z"}
+{"duration":"11ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":304,"timestamp":"2025-06-27T08:04:23.590Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T08:04:23.591Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T08:04:23.591Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:04:23.593Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:04:23.593Z"}
+{"duration":"3ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":304,"timestamp":"2025-06-27T08:04:23.593Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T08:04:24.463Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T08:04:24.463Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:04:24.468Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:04:24.468Z"}
+{"duration":"7ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":304,"timestamp":"2025-06-27T08:04:24.470Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T08:04:24.471Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T08:04:24.471Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:04:24.475Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:04:24.475Z"}
+{"duration":"5ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":304,"timestamp":"2025-06-27T08:04:24.476Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T08:04:24.610Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T08:04:24.610Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:04:24.613Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:04:24.613Z"}
+{"duration":"4ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":304,"timestamp":"2025-06-27T08:04:24.614Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T08:04:24.615Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T08:04:24.615Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:04:24.617Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:04:24.617Z"}
+{"duration":"4ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":304,"timestamp":"2025-06-27T08:04:24.618Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T08:05:29.205Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T08:05:29.206Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:05:29.216Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:05:29.217Z"}
+{"duration":"12ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":304,"timestamp":"2025-06-27T08:05:29.217Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"duration":"12ms","ip":"::1","level":"info","message":"HTTP Request","method":"OPTIONS","service":"ats-backend","status":200,"timestamp":"2025-06-27T08:15:57.922Z","url":"/api/candidatos/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"email":"alvaro.maldonado1988@gmail.com","id":64,"ip":"::1","level":"info","message":"Petición para actualizar candidato recibida","service":"ats-backend","timestamp":"2025-06-27T08:15:57.955Z"}
+{"id":64,"level":"info","message":"Buscando candidato por ID","service":"ats-backend","timestamp":"2025-06-27T08:15:57.963Z"}
+{"id":64,"level":"info","message":"Candidato encontrado","service":"ats-backend","timestamp":"2025-06-27T08:15:58.038Z"}
+{"id":64,"level":"info","message":"Actualizando candidato","service":"ats-backend","timestamp":"2025-06-27T08:15:58.048Z"}
+{"id":64,"level":"info","message":"Candidato actualizado exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:15:58.057Z"}
+{"id":64,"level":"info","message":"Candidato actualizado exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:15:58.057Z"}
+{"duration":"125ms","ip":"::1","level":"info","message":"HTTP Request","method":"PUT","service":"ats-backend","status":200,"timestamp":"2025-06-27T08:15:58.059Z","url":"/64","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"filters":{},"ip":"::1","level":"info","message":"Petición para obtener candidatos recibida","service":"ats-backend","timestamp":"2025-06-27T08:15:58.066Z"}
+{"filters":{},"level":"info","message":"Obteniendo candidatos","service":"ats-backend","timestamp":"2025-06-27T08:15:58.066Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:15:58.069Z"}
+{"count":16,"level":"info","message":"Candidatos obtenidos exitosamente","service":"ats-backend","timestamp":"2025-06-27T08:15:58.069Z"}
+{"duration":"4ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"ats-backend","status":304,"timestamp":"2025-06-27T08:15:58.071Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}

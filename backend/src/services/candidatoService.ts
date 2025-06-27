@@ -1,6 +1,6 @@
 import { CandidatoRepository } from '../repositories/candidatoRepository';
 import { ICandidato, ICandidatoCreate, ICandidatoUpdate, ICandidatoFilters, ICandidatoResponse } from '../types/candidato';
-import { validateCreateCandidato, validateUpdateCandidato } from '../validators/candidatoValidator';
+import { validateCreateCandidato, validateUpdateCandidato, traducirMensajeCampo } from '../validators/candidatoValidator';
 import logger from '../config/logger';
 
 /**
@@ -150,11 +150,11 @@ export class CandidatoService {
           id 
         });
         
-        // Crear un objeto con errores específicos por campo
+        // Crear un objeto con errores específicos por campo, traducidos
         const fieldErrors: { [key: string]: string } = {};
         validation.error.details.forEach(detail => {
           const field = detail.path[0] as string;
-          fieldErrors[field] = detail.message;
+          fieldErrors[field] = traducirMensajeCampo(field, detail.message);
         });
         
         return {
